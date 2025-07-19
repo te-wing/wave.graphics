@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <header className={styles.fixedHeader}>
           <h1 className={styles.mainTitleMini}>
-            <Link href='/' className={styles.titleLink}>Wave</Link>by Wing
+            <Link href='/' className={styles.titleLink}>Wave</Link>by <a className={styles.mainTitleMini} href='https://wing.osaka' target='_blank'>Wing</a>
           </h1>
         </header>
         {children}

@@ -1,6 +1,9 @@
-.mainTitleMini {
+.mainTitleMini, 
+.mainTitleMini:hover {
   font-size: 16px;
   font-family: Playwrite;
+  color: var(--foreground);
+  font-weight: bold;
 }
 
 //グラデーション用CSS変数
@@ -37,7 +40,8 @@
   color: transparent;
 }
 
-//ヘッダー固定
+//ヘッダー固定と影
 .fixedHeader {
   position: fixed;
+  
 }
