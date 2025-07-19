@@ -16,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        <h1><Link href='/' className={styles.titleLink}>Wave</Link> by Wing</h1>
+        <h1 className={styles.mainTitleMini}>
+          <Link href='/' className={styles.titleLink}>Wave</Link> by Wing
+        </h1>
         {children}
       </body>
     </html>
