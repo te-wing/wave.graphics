@@ -39,3 +39,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+//共通のデザイン
+a {
+    font-weight: 500;
+    color: var(--a-default);
+    text-decoration: inherit;
+}
+a:hover {
+    color: var(--a-hover);
+}
+
+a, p, h3, h4 {
+    font-family: ZenMaru;
+}
