@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import styles from './rootLayout.module.scss';
 
 export const metadata: Metadata = {
   title: "Wave | Physics Simulator App by Wing",
