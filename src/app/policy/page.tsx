@@ -1,5 +1,3 @@
-import styles from './policyPage.module.scss';
-
 export default function policyPage() {
   return (
     <>

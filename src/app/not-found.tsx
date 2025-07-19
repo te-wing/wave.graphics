@@ -1,5 +1,3 @@
-import styes from './page404.module.scss';
-
 export const runtime = "edge";
 
 export default function NotFound() {
