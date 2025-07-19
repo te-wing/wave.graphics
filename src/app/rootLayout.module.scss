@@ -7,11 +7,13 @@
 .titleLink {
   --gradientLeft: #02175c;
   --gradientRight: #0072ff;
+  --gradientLeftHover: #02175cab;
+  --gradientRightHover: #0073ffab;
 }
 @media (prefers-color-scheme: dark) {
   .titleLink {
     --gradientLeft: #00c6ff;
-    --gradientRight: #0072ff;
+    --gradientLeftHober: #00c6ffab;
   }
 }
 
@@ -26,4 +28,16 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.titleLink:hover {
+  background: linear-gradient(45deg, var(--gradientLeftHover), var(--gradientRightHover));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+//ヘッダー固定
+.fixedHeader {
+  position: fixed;
 }
