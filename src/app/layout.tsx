@@ -24,6 +24,10 @@ export default function RootLayout({
         <section className={styles.children}>
           {children}
         </section>
+        <footer className={styles.fixedFooter}>
+          <p>&copy; 2025 Wing. Designed by <a href='https://wing.osaka' target='_blank'>wing.osaka</a>.</p>
+          <p>転載・改変の条件等は，<Link href='/policy'>利用規約</Link>に記載しております．</p>
+        </footer>
       </body>
     </html>
   );
