@@ -21,7 +21,9 @@ export default function RootLayout({
             <Link href='/' className={styles.titleLink}>Wave</Link>by <a className={styles.mainTitleMini} href='https://wing.osaka' target='_blank'>Wing</a>
           </h1>
         </header>
-        {children}
+        <section className={styles.children}>
+          {children}
+        </section>
       </body>
     </html>
   );
