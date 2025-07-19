@@ -3,10 +3,27 @@
   font-family: Playwrite;
 }
 
+//グラデーション用CSS変数
 .titleLink {
-  color: var(--foreground);
+  --gradientLeft: #02175c;
+  --gradientRight: #0072ff;
+}
+@media (prefers-color-scheme: dark) {
+  .titleLink {
+    --gradientLeft: #00c6ff;
+    --gradientRight: #0072ff;
+  }
+}
+
+.titleLink {
+  font-weight: bold;
   text-decoration: none;
   font-size: 29px;
   font-family: Playwrite;
   margin-right: 15px;
+  //背景にグラデーションを設定
+  background: linear-gradient(45deg, var(--gradientLeft), var(--gradientRight));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
