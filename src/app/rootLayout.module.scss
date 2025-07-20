@@ -4,6 +4,7 @@
   font-family: Playwrite;
   color: var(--foreground);
   font-weight: bold;
+  margin: -9px 7px;
 }
 
 //グラデーション用CSS変数
@@ -47,11 +48,11 @@
   left: 0px;
   width: 100%;
   box-shadow: 0 1px 7px var(--foreground);
-  height: 48px;
+  height: 36px;
 }
 
 .children {
-  margin-top: 57px;
+  margin-top: 32px;
   margin-bottom: 110px;
 }
 
@@ -61,4 +62,12 @@
   left: 0px;
   width: 100%;
   box-shadow: 0 1px 7px var(--foreground);
+}
+
+.footerBox {
+  margin-left: 10px;
+}
+
+.footerContent {
+  margin: 4px;
 }
