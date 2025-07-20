@@ -30,7 +30,7 @@ export default function policyPage() {
         </table>
       </section>
       <h3>連絡先</h3>
-      <p>このサイトに関してのフィードバックは，<a href='mailto:wing@me.wing.osaka'>wing@me.wing.osaka</a>まで，ユーザの任意と同意に基づき情報提供をしていただけます．なお，トラブルがあった際の窓口も同様の連絡先になります．</p>
+      <p>このサイトに関してのフィードバックは，<a href='mailto:wing@me.wing.osaka'>wing@me.wing.osaka</a>まで，ユーザの任意かつ明示的な同意に基づき情報提供をしていただけます．なお，トラブルがあった際の窓口も同様の連絡先になります．</p>
     </>
   )
 }
