@@ -1,0 +1,19 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'ご利用規約 | Wave App by Wing',
+  description: 'このアプリをご利用なさる場合は，このページに記載している規約等に同意していただく必要があります．'
+}
+
+export default function PolicyLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <>
+      <h2>ご利用規約</h2>
+      {children}
+    </>
+  );
+}

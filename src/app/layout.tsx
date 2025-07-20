@@ -4,7 +4,7 @@ import styles from './rootLayout.module.scss';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "Wave | Physics Simulator App by Wing",
+  title: "Wave App by Wing",
   description: "物理の勉強で出てくるような，波の様子をオンラインで簡単に可視化できます．",
 };
 
