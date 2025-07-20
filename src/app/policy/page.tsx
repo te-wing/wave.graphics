@@ -12,17 +12,17 @@ export default function policyPage() {
         <table>
           <tbody>
             <tr>
-              <td><Link href='/policy/privacy'>プライバシーに関する声明</Link></td>
+              <td><Link href='/policy/c/privacy'>プライバシーに関する声明</Link></td>
               <td>：</td>
               <td>当サイト及び運営者が取得する情報について</td>
             </tr>
             <tr>
-              <td><Link href='/policy/privacy'>ご利用規約</Link></td>
+              <td><Link href='/policy/c/use'>ご利用規約</Link></td>
               <td>：</td>
               <td>ご利用頂くための規則および確認事項</td>
             </tr>
             <tr>
-              <td><Link href='/policy/privacy'>複製・転載・改変について</Link></td>
+              <td><Link href='/policy/c/copy'>複製・転載・改変について</Link></td>
               <td>：</td>
               <td>当サイトの複製・転載・改変の可否について</td>
             </tr>
