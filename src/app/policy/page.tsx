@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import styles from './policyList.module.scss';
 
 export default function policyPage() {
   return (
