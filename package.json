@@ -13,6 +13,7 @@
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv ./env.d.ts"
 	},
 	"dependencies": {
+		"@types/react-katex": "^3.0.4",
 		"katex": "^0.16.22",
 		"next": "15.3.5",
 		"react": "^19.0.0",
