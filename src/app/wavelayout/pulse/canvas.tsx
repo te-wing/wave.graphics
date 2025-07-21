@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useCallback, useState } from 'react';
+import styles from './pulsecanvas.module.scss';
 
 interface PulseWaveCanvasProps {
   pulseSpread?: number;
@@ -179,7 +180,8 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
       ref={canvasRef}
       width={canvasWidth}
       height={height}
-      style={{ width: '100%', height: `${height}px`, border: '1px solid #ddd', display: 'block', margin: '0 auto' }}
+      className={styles.canvas}
+      style={{height: `${height}px`}}
     />
   );
 };
