@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import OscillationCanvas from './canvas';
 import styles from './tanshindoupage.module.scss';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 
 export const metadata: Metadata = {
   title: '単振動 | Wave App by Wing',
