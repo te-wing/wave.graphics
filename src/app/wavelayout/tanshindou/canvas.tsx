@@ -179,7 +179,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   };
 
   return (
-    <div>
+    <>
       <canvas id="myCanvas" ref={canvasRef} width={800} height={490}></canvas>
       <div className="controls">
         <label htmlFor="amplitude">振幅 (円の半径):</label>
@@ -200,7 +200,8 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
             }
           }}
         />
-        <label htmlFor="frequency">角振動数 (ω):</label>
+        <br />
+        <label htmlFor="frequency">角振動数:</label>
         <input
           type="range"
           className={styles.slider}
@@ -217,12 +218,13 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
             }
           }}
         />
+        <br />
         <button onClick={handleReset}>リセット</button>
         <button onClick={handlePlayPause}>
           {isPlaying ? '一時停止' : '再生'}
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
