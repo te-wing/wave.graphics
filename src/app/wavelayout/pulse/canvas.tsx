@@ -8,7 +8,7 @@ interface PulseWaveCanvasProps {
   pulseSpeed?: number;
   duration?: number;
   sampleRate?: number;
-  width?: number;
+  // width?: number;
   height?: number;
   lineColor?: string;
   backgroundColor?: string;
@@ -23,19 +23,20 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
   pulseSpeed = 0.2,
   duration = 0.7,
   sampleRate = 1000,
-  width = 800,
+  // width = 800,
   height = 300,
   lineColor = '#ffae00ff',
   backgroundColor = 'transparent',
   dotColor = 'red',
   dotRadius = 4,          // 点の半径
-  dotDensity = 20,        // 50ピクセルごとに点を打つ
+  dotDensity = 20,        // 20ピクセルごとに点を打つ
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | null>(null);
   const startTime = useRef<number | null>(null);
 
   const [timeOffset, setTimeOffset] = useState(0);
+  const [canvasWidth, setCanvasWidth] = useState(800); // 内部描画用の幅をstateで管理
 
   // ガウス関数に基づく単一パルス波のデータを生成する関数 (変更なし)
   const generateSinglePulseData = useCallback((
@@ -82,14 +83,14 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, canvasWidth, height);
     ctx.fillStyle = backgroundColor;
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillRect(0, 0, canvasWidth, height);
 
     // 波形データ生成
     const waveData = generateSinglePulseData(pulseAmplitude, pulseSpread, duration, sampleRate, timeOffset);
 
-    const xScale = width / duration;
+    const xScale = canvasWidth / duration;
     const yScale = height / (pulseAmplitude * 2);
     const yOffset = height / 2; // 中央線
 
@@ -115,14 +116,14 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, yOffset);
-    ctx.lineTo(width, yOffset);
+    ctx.lineTo(canvasWidth, yOffset);
     ctx.stroke();
 
     // --- 点の描画 (ここから追加/変更) ---
     ctx.fillStyle = dotColor;
 
     // キャンバスの幅にわたって一定間隔で点を配置
-    for (let xPixel = dotDensity; xPixel < width; xPixel += dotDensity) {
+    for (let xPixel = dotDensity; xPixel < canvasWidth; xPixel += dotDensity) {
       // ピクセル座標を時間座標に変換
       const t = xPixel / xScale;
 
@@ -140,7 +141,7 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
       ctx.fill();
     }
 
-  }, [pulseAmplitude, pulseSpread, duration, sampleRate, timeOffset, width, height, lineColor, backgroundColor, dotColor, dotRadius, dotDensity, generateSinglePulseData, getWaveAmplitudeAtTime]); // 依存配列に新しいpropsと関数を追加
+  }, [pulseAmplitude, pulseSpread, duration, sampleRate, timeOffset, canvasWidth, height, lineColor, backgroundColor, dotColor, dotRadius, dotDensity, generateSinglePulseData, getWaveAmplitudeAtTime]); // 依存配列に新しいpropsと関数を追加
 
   // アニメーションループ (変更なし)
   const animate = useCallback((timestamp: DOMHighResTimeStamp) => {
@@ -176,9 +177,9 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
   return (
     <canvas
       ref={canvasRef}
-      width={width}
+      width={canvasWidth}
       height={height}
-      style={{ border: '1px solid #ddd', display: 'block', margin: '0 auto' }}
+      style={{ width: '100%', height: `${height}px`, border: '1px solid #ddd', display: 'block', margin: '0 auto' }}
     />
   );
 };
