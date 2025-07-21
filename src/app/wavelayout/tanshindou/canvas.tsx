@@ -38,9 +38,9 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
     // --- 描画の基準点を調整 ---
     const circleCenterX = canvas.width / 2;
-    const circleCenterY = canvas.height / 3;
+    const circleCenterY = canvas.height / 2.4;
     const shmOriginX = canvas.width / 2;
-    const shmLineY = canvas.height * 2 / 3;
+    const shmLineY = canvas.height / 1.1;
 
     const circlePointX = circleCenterX + amplitude * Math.cos(angle);
     const circlePointY = circleCenterY - amplitude * Math.sin(angle);
@@ -181,7 +181,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   return (
     <>
       <div className={styles.controls}>
-      <canvas id="myCanvas" ref={canvasRef} width={800} height={490}></canvas>
+        <canvas id="myCanvas" ref={canvasRef} width={340} height={400}></canvas>
         <table>
           <tbody>
             <tr>
