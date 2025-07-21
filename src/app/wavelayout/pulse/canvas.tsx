@@ -37,7 +37,7 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
   const startTime = useRef<number | null>(null);
 
   const [timeOffset, setTimeOffset] = useState(0);
-  const [canvasWidth, setCanvasWidth] = useState(800); // 内部描画用の幅をstateで管理
+  const [canvasWidth] = useState(800); // 内部描画用の幅をstateで管理
 
   // ガウス関数に基づく単一パルス波のデータを生成する関数 (変更なし)
   const generateSinglePulseData = useCallback((
