@@ -33,7 +33,8 @@ export default function Home() {
       <h3>利用したフレームワーク</h3>
       <ul>
         <li><a href='https://r.wing.osaka/nextjs' target='_blank'>Next.js</a></li>
-        <li><a href='https://katex.org/' target='_blank'>Katex</a></li>
+        <li><a href='https://r.wing.osaka/katex' target='_blank'>Katex</a></li>
+        <li><a href='https://r.wing.osaka/sass' target='_blank'>Sass</a></li>
       </ul>
     </>
   );
