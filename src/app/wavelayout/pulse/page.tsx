@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PulseWaveCanvas from './canvas';
 
 export const metadata: Metadata = {
   title: 'パルス波 | Wave App by Wing',
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
 export default function パルス波() {
   return(
     <>
-      <p>すみません，準備中です...</p>
+      <h2>パルス波</h2>
+      <PulseWaveCanvas />
     </>
   )
 }
