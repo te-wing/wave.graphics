@@ -1,13 +1,9 @@
-import type { Metadata } from "next";
+'use client';
+
 import "./globals.scss";
 import styles from './rootLayout.module.scss';
 import Link from 'next/link';
 import 'katex/dist/katex.min.css';
-
-export const metadata: Metadata = {
-  title: "Wave App by Wing",
-  description: "物理の勉強で出てくるような，波の様子をオンラインで簡単に可視化できます．",
-};
 
 export default function RootLayout({
   children,
