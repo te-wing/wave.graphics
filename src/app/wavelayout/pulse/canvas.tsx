@@ -26,7 +26,7 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
   sampleRate = 1000,
   // width = 800,
   height = 300,
-  lineColor = '#ffae00ff',
+  lineColor = 'orange',
   backgroundColor = 'transparent',
   dotColor = 'red',
   dotRadius = 4,          // 点の半径
@@ -113,7 +113,7 @@ const PulseWaveCanvas: React.FC<PulseWaveCanvasProps> = ({
     ctx.stroke();
 
     // 中央の線
-    ctx.strokeStyle = '#ccc';
+    ctx.strokeStyle = 'gray';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, yOffset);
