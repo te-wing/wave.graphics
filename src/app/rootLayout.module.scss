@@ -50,6 +50,7 @@
   box-shadow: 0 1px 7px var(--foreground);
   height: 36px;
   background-color: var(--background-transparent);
+  backdrop-filter: blur(3px);
 }
 
 .children {
@@ -64,6 +65,7 @@
   width: 100%;
   box-shadow: 0 1px 7px var(--foreground);
   background-color: var(--background-transparent);
+  backdrop-filter: blur(1px);
 }
 
 .footerBox {
