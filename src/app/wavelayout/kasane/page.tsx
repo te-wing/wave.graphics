@@ -1,11 +1,7 @@
-import type { Metadata } from 'next';
+'use client';
+
 import React, { useState } from 'react';
 import SuperpositionCanvas from './canvas';
-
-export const metadata: Metadata = {
-  title: '波の重ね合わせ | Wave App by Wing',
-  description: '先ほどのパルス波を使って，二つの波が重なったらどうなるか，観察してみましょう．'
-}
 
 export default function 重ね合わせ() {
   // スライダの値を管理
@@ -28,8 +24,8 @@ export default function 重ね合わせ() {
             <input
               id='leftAmplitudeSlider'
               type='range'
-              min='-90'
-              max='90'
+              min='-120'
+              max='120'
               value={leftAmplitude}
               onChange={(e) => setLeftAmplitude(Number(e.target.value))}
             />
@@ -41,8 +37,8 @@ export default function 重ね合わせ() {
             <input
               id='rightAmplitudeSlider'
               type='range'
-              min='-90'
-              max='90'
+              min='-120'
+              max='120'
               value={rightAmplitude}
               onChange={(e) => setRightAmplitude(Number(e.target.value))}
             />

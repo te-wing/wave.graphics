@@ -1,5 +1,3 @@
-'use client';
-
 import "./globals.scss";
 import styles from './rootLayout.module.scss';
 import Link from 'next/link';
