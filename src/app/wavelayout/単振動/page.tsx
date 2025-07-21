@@ -1,0 +1,14 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '単振動 | Wave App by Wing',
+  description: '波を理解するのに，単振動は必須です．'
+}
+
+export default function 縦波と横波() {
+  return(
+    <>
+      <p>すみません，準備中です...</p>
+    </>
+  )
+}
