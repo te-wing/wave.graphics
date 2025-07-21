@@ -11,6 +11,10 @@ export default function パルス波() {
     <>
       <h2>パルス波</h2>
       <PulseWaveCanvas />
+      <section>
+        <h3>パルス波</h3>
+        <p>ごく短い間振動させることで生じる，単独の波</p>
+      </section>
     </>
   )
 }
