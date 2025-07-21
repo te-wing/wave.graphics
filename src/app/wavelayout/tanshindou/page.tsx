@@ -8,7 +8,8 @@ export const metadata: Metadata = {
 export default function 縦波と横波() {
   return(
     <>
-      <p>すみません，準備中です...</p>
+      <h2>単振動</h2>
+      <canvas id='myCanvas'></canvas>
     </>
   )
 }
