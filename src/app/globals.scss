@@ -10,6 +10,7 @@
 
 :root {
   --background: #8cd7ff;
+  --background-transparent: rgb(140, 215, 255, 62%);
   --foreground: #222222;
   --a-default: #3f48ffcb;
   --a-hover: #4d56ffa9;
@@ -20,6 +21,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #000242;
+    --background-transparent: rgb(0, 2, 66, 62%);
     --foreground: #fffff1df;
     --a-default: #ffd6b0e7;
     --a-hover: #ffd52ddc;
