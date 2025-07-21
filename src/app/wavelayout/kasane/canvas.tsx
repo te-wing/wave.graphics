@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import styles from './superpositioncanvas.module.scss'; // スタイルファイル名はそのままにしています
+import styles from './superpositioncanvas.module.scss';
 
 interface SuperpositionCanvasProps {
   waveSpread?: number;
-  waveAmplitude?: number;
+  waveAmplitudeLeft?: number; // 左の波の振幅 (ピクセル単位)
+  waveAmplitudeRight?: number; // 右の波の振幅 (ピクセル単位)
   waveSpeed?: number;
   duration?: number;
   sampleRate?: number;
@@ -15,12 +16,13 @@ interface SuperpositionCanvasProps {
   dotColor?: string;
   dotRadius?: number;
   dotDensity?: number;
-  showIndividualWaves?: boolean; // 個々の波を表示するかどうかのオプション
+  showIndividualWaves?: boolean;
 }
 
 const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
   waveSpread = 0.05,
-  waveAmplitude = 50,
+  waveAmplitudeLeft = 50, // 左の波のデフォルト振幅 (50px)
+  waveAmplitudeRight = 50, // 右の波のデフォルト振幅 (50px)
   waveSpeed = 0.2,
   duration = 0.7,
   sampleRate = 1000,
@@ -36,13 +38,12 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
   const animationFrameId = useRef<number | null>(null);
   const startTime = useRef<number | null>(null);
 
-  const [timeOffsetLeftWave, setTimeOffsetLeftWave] = useState(0); // 左から来る波の時間オフセット
-  const [timeOffsetRightWave, setTimeOffsetRightWave] = useState(0); // 右から来る波の時間オフセット
+  const [timeOffsetLeftWave, setTimeOffsetLeftWave] = useState(0);
+  const [timeOffsetRightWave, setTimeOffsetRightWave] = useState(0);
   const [canvasWidth] = useState(800);
 
-  // ガウス関数に基づく単一波のデータを生成する関数
   const generateGaussianWaveData = useCallback((
-    amp: number,
+    amp: number, // このampはピクセル値として扱われる
     sigma: number,
     dur: number,
     sr: number,
@@ -55,7 +56,7 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
     for (let i = 0; i < numSamples; i++) {
       const t = i * timePerSample;
       const exponent = -Math.pow(t - centerTime, 2) / (2 * Math.pow(sigma, 2));
-      const value = amp * Math.exp(exponent);
+      const value = amp * Math.exp(exponent); // ampを直接使用
       data.push({
         x: t,
         y: value,
@@ -64,15 +65,14 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
     return data;
   }, []);
 
-  // 特定の時刻 (X座標) における波の振幅を取得するヘルパー関数
   const getGaussianWaveAmplitudeAtTime = useCallback((
     targetTime: number,
-    amp: number,
+    amp: number, // このampはピクセル値として扱われる
     sigma: number,
     centerTime: number
   ): number => {
     const exponent = -Math.pow(targetTime - centerTime, 2) / (2 * Math.pow(sigma, 2));
-    return amp * Math.exp(exponent);
+    return amp * Math.exp(exponent); // ampを直接使用
   }, []);
 
 
@@ -88,7 +88,9 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
     ctx.fillRect(0, 0, canvasWidth, height);
 
     const xScale = canvasWidth / duration;
-    const yScale = height / (waveAmplitude * 2);
+    // waveAmplitudeLeft/Right が直接ピクセル値として扱われるため、yScaleは不要、または1とする
+    // ただし、y座標の反転とY軸方向の表示調整のための0.8は残す
+    // const yScale = 1; // これで直接ピクセル値として機能する
     const yCenter = height / 2; // 中央線
 
     // 中央の線
@@ -103,35 +105,31 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
     ctx.fillStyle = dotColor;
 
     for (let xPixel = dotDensity; xPixel < canvasWidth; xPixel += dotDensity) {
-      const t = xPixel / xScale; // ピクセル座標を時間座標に変換
+      const t = xPixel / xScale;
 
-      // 左から来る波の振幅
-      const amplitudeLeft = getGaussianWaveAmplitudeAtTime(t, waveAmplitude, waveSpread, timeOffsetLeftWave);
-      // 右から来る波の振幅（時間軸を反転させて、右端から左へ進むようにする）
-      const amplitudeRight = getGaussianWaveAmplitudeAtTime(duration - t, waveAmplitude, waveSpread, timeOffsetRightWave);
+      const amplitudeLeft = getGaussianWaveAmplitudeAtTime(t, waveAmplitudeLeft, waveSpread, timeOffsetLeftWave);
+      const amplitudeRight = getGaussianWaveAmplitudeAtTime(duration - t, waveAmplitudeRight, waveSpread, timeOffsetRightWave);
 
-      // 合成波の振幅
       const combinedAmplitude = amplitudeLeft + amplitudeRight;
 
-      // 点のY座標を計算
-      const dotY = yCenter - combinedAmplitude * 0.8 * yScale;
+      // yCenterから、算出された振幅分を引く（Y軸は下方向が正のため）
+      // 0.8をかけることで、波が画面内に収まるように調整
+      const dotY = yCenter - combinedAmplitude * 0.8;
 
-      // 点を描画
       ctx.beginPath();
       ctx.arc(xPixel, dotY, dotRadius, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // オプションで個々の波形も描画
     if (showIndividualWaves) {
       // 左から来る波の描画
-      ctx.strokeStyle = 'rgba(255, 165, 0, 0.5)'; // 半透明のオレンジ
+      ctx.strokeStyle = 'rgba(255, 165, 0, 0.5)';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       for (let xPixel = 0; xPixel < canvasWidth; xPixel++) {
         const t = xPixel / xScale;
-        const amplitude = getGaussianWaveAmplitudeAtTime(t, waveAmplitude, waveSpread, timeOffsetLeftWave);
-        const y = yCenter - amplitude * 0.8 * yScale;
+        const amplitude = getGaussianWaveAmplitudeAtTime(t, waveAmplitudeLeft, waveSpread, timeOffsetLeftWave);
+        const y = yCenter - amplitude * 0.8; // 0.8をかける
         if (xPixel === 0) {
           ctx.moveTo(xPixel, y);
         } else {
@@ -141,13 +139,13 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
       ctx.stroke();
 
       // 右から来る波の描画
-      ctx.strokeStyle = 'rgba(0, 191, 255, 0.5)'; // 半透明のスカイブルー
+      ctx.strokeStyle = 'rgba(0, 191, 255, 0.5)';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       for (let xPixel = 0; xPixel < canvasWidth; xPixel++) {
         const t = xPixel / xScale;
-        const amplitude = getGaussianWaveAmplitudeAtTime(duration - t, waveAmplitude, waveSpread, timeOffsetRightWave);
-        const y = yCenter - amplitude * 0.8 * yScale;
+        const amplitude = getGaussianWaveAmplitudeAtTime(duration - t, waveAmplitudeRight, waveSpread, timeOffsetRightWave);
+        const y = yCenter - amplitude * 0.8; // 0.8をかける
         if (xPixel === 0) {
           ctx.moveTo(xPixel, y);
         } else {
@@ -158,15 +156,15 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
     }
 
     // 合成波の線を描画
-    ctx.strokeStyle = lineColor; // メインの線の色
+    ctx.strokeStyle = lineColor;
     ctx.lineWidth = 2;
     ctx.beginPath();
     for (let xPixel = 0; xPixel < canvasWidth; xPixel++) {
       const t = xPixel / xScale;
-      const amplitudeLeft = getGaussianWaveAmplitudeAtTime(t, waveAmplitude, waveSpread, timeOffsetLeftWave);
-      const amplitudeRight = getGaussianWaveAmplitudeAtTime(duration - t, waveAmplitude, waveSpread, timeOffsetRightWave);
+      const amplitudeLeft = getGaussianWaveAmplitudeAtTime(t, waveAmplitudeLeft, waveSpread, timeOffsetLeftWave);
+      const amplitudeRight = getGaussianWaveAmplitudeAtTime(duration - t, waveAmplitudeRight, waveSpread, timeOffsetRightWave);
       const combinedAmplitude = amplitudeLeft + amplitudeRight;
-      const y = yCenter - combinedAmplitude * 0.8 * yScale;
+      const y = yCenter - combinedAmplitude * 0.8; // 0.8をかける
       if (xPixel === 0) {
         ctx.moveTo(xPixel, y);
       } else {
@@ -175,7 +173,7 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
     }
     ctx.stroke();
 
-  }, [waveAmplitude, waveSpread, duration, sampleRate, timeOffsetLeftWave, timeOffsetRightWave, canvasWidth, height, lineColor, backgroundColor, dotColor, dotRadius, dotDensity, getGaussianWaveAmplitudeAtTime, showIndividualWaves]);
+  }, [waveSpread, duration, timeOffsetLeftWave, timeOffsetRightWave, canvasWidth, height, lineColor, backgroundColor, dotColor, dotRadius, dotDensity, getGaussianWaveAmplitudeAtTime, showIndividualWaves, waveAmplitudeLeft, waveAmplitudeRight]);
 
   const animateWaves = useCallback((timestamp: DOMHighResTimeStamp) => {
     if (!startTime.current) {
@@ -183,9 +181,7 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
     }
     const elapsed = timestamp - startTime.current;
 
-    // 左から来る波のオフセット
     const newOffsetLeft = (elapsed / 1000) * waveSpeed * duration;
-    // 右から来る波のオフセット (右端から左へ動くように調整)
     const newOffsetRight = (elapsed / 1000) * waveSpeed * duration;
 
     if (newOffsetLeft > duration * 2 || newOffsetRight > duration * 2) {

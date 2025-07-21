@@ -9,7 +9,10 @@ export const metadata: Metadata = {
 export default function 重ね合わせ() {
   return (
     <>
-      <SuperpositionCanvas />
+      <SuperpositionCanvas 
+        waveAmplitudeLeft={90}
+        waveAmplitudeRight={32}
+      />
     </>
   )
 }
