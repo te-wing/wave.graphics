@@ -58,6 +58,15 @@ export default function 重ね合わせ() {
           </tbody>
         </table>
       </section>
+      <section>
+        <h3>波の重ね合わせ</h3>
+        <p>複数の波が同じ場所で重なり合ったときに，<strong>それぞれの波は独立に存在しながらも，一時的に合成された波が観測される</strong>現象を，波の重ね合わせという．</p>
+        <h4>特徴</h4>
+        <ul>
+          <li><strong>波の独立性</strong>：波は，他の波と重なっても互いに影響を与えず，それぞれの波形や速さを保ったまま進む．したがって，通り過ぎた後は元の形に戻る．</li>
+          <li><strong></strong></li>
+        </ul>
+      </section>
     </>
   )
 }
