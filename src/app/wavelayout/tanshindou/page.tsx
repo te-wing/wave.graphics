@@ -5,7 +5,7 @@ import { InlineMath, BlockMath } from 'react-katex';
 
 export const metadata: Metadata = {
   title: '単振動 | Wave App by Wing',
-  description: '波を理解するのに，単振動は必須です．'
+  description: '波を理解するのに，単振動は必須です．さっそく可視化してみましょう．'
 }
 
 export default function 縦波と横波() {

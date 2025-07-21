@@ -4,7 +4,7 @@ import styles from './pulsepage.module.scss';
 
 export const metadata: Metadata = {
   title: 'パルス波 | Wave App by Wing',
-  description: 'パルス波を可視化できるツールです．'
+  description: 'ごく短い間の単独の波を，パルス波といいます．パルス波を用いて，波の伝わり方を観察しましょう．'
 }
 
 export default function パルス波() {
