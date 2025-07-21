@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SuperpositionCanvas from './canvas';
 
 export const metadata: Metadata = {
   title: '波の重ね合わせ | Wave App by Wing',
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 export default function 重ね合わせ() {
   return (
     <>
-    
+      <SuperpositionCanvas />
     </>
   )
 }
