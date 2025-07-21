@@ -1,4 +1,3 @@
-// components/OscillationCanvas.tsx
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
@@ -16,6 +15,9 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   const [amplitude, setAmplitude] = useState(initialAmplitude);
   const [angularFrequency, setAngularFrequency] = useState(initialFrequency);
   const [startTime, setStartTime] = useState(Date.now());
+  const [isPlaying, setIsPlaying] = useState(true); // アニメーションが再生中かどうかの状態
+  const animationFrameIdRef = useRef<number | null>(null); // requestAnimationFrame IDを保持
+  const pausedTimeRef = useRef<number>(0); // 一時停止した時点の経過時間（ミリ秒）
 
   const animate = useCallback(() => {
     const canvas = canvasRef.current;
@@ -23,46 +25,41 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // 経過時間 (秒)
-    const elapsedTime = (Date.now() - startTime) / 1000;
+    // アニメーションが一時停止中の場合は描画ループを停止
+    if (!isPlaying) {
+        animationFrameIdRef.current = null;
+        return;
+    }
 
-    // 円運動の角度 (ラジアン)
-    const angle = angularFrequency * elapsedTime;
+    // 経過時間 (秒) の計算
+    const currentElapsedTime = (Date.now() - startTime + pausedTimeRef.current) / 1000;
+    const angle = angularFrequency * currentElapsedTime;
 
     // --- 描画の基準点を調整 ---
-    // 上側の円運動の中心
-    const circleCenterX = canvas.width / 2; // 中央に配置
-    const circleCenterY = canvas.height / 4; // 上の方に配置
+    const circleCenterX = canvas.width / 2;
+    const circleCenterY = canvas.height / 4;
+    const shmOriginX = canvas.width / 2;
+    const shmLineY = canvas.height * 3 / 4;
 
-    // 下側の単振動の平衡点
-    const shmOriginX = canvas.width / 2; // 円運動と同じX座標
-    const shmLineY = canvas.height * 3 / 4; // 下の方に配置
-
-    // 円周上の点の座標
     const circlePointX = circleCenterX + amplitude * Math.cos(angle);
-    const circlePointY = circleCenterY - amplitude * Math.sin(angle); // Y軸反転
+    const circlePointY = circleCenterY - amplitude * Math.sin(angle);
 
-    // 単振動のX座標 (円周上の点のX座標をそのまま投影)
-    const shmCurrentX = shmOriginX + amplitude * Math.cos(angle); // 円運動のX成分を直接利用
+    const shmCurrentX = shmOriginX + amplitude * Math.cos(angle);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // --- 上側の円運動の描画 ---
-
-    // 円の中心
     ctx.beginPath();
     ctx.arc(circleCenterX, circleCenterY, 5, 0, Math.PI * 2);
     ctx.fillStyle = 'red';
     ctx.fill();
 
-    // 円の軌道
     ctx.beginPath();
     ctx.arc(circleCenterX, circleCenterY, amplitude, 0, Math.PI * 2);
     ctx.strokeStyle = 'gray';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // 円周上の点
     ctx.beginPath();
     ctx.arc(circlePointX, circlePointY, 10, 0, Math.PI * 2);
     ctx.fillStyle = 'purple';
@@ -71,7 +68,6 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    // 中心から円周上の点への線 (半径)
     ctx.beginPath();
     ctx.moveTo(circleCenterX, circleCenterY);
     ctx.lineTo(circlePointX, circlePointY);
@@ -80,66 +76,105 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.stroke();
 
     // --- 円運動と単振動を繋ぐ垂線 (正射影) ---
-
-    // 円周上の点から単振動のおもりへ下ろす垂直な点線
     ctx.beginPath();
-    ctx.setLineDash([5, 5]); // 点線
+    ctx.setLineDash([5, 5]);
     ctx.moveTo(circlePointX, circlePointY);
-    ctx.lineTo(shmCurrentX, shmLineY); // 円周上のX座標から単振動のY座標まで
+    ctx.lineTo(shmCurrentX, shmLineY);
     ctx.strokeStyle = 'green';
     ctx.stroke();
-    ctx.setLineDash([]); // 点線をリセット
+    ctx.setLineDash([]);
 
     // --- 下側の左右単振動の描画 ---
-
     // 単振動の平衡点 (中央の赤い点線)
     ctx.beginPath();
-    ctx.setLineDash([5, 5]); // 点線
-    ctx.moveTo(shmOriginX, 0); // Y座標をキャンバスの上端 (0) に変更
-    ctx.lineTo(shmOriginX, canvas.height); // Y座標をキャンバスの下端 (canvas.height) に変更
+    ctx.setLineDash([5, 5]);
+    ctx.moveTo(shmOriginX, 0);
+    ctx.lineTo(shmOriginX, canvas.height);
     ctx.strokeStyle = 'red';
     ctx.stroke();
-    ctx.setLineDash([]); // 点線をリセット
+    ctx.setLineDash([]);
 
     // 単振動の軌道 (水平線)
     ctx.beginPath();
-    ctx.moveTo(shmOriginX - amplitude - 20, shmLineY); // 振幅の範囲より少し長く
-    ctx.lineTo(shmOriginX + amplitude + 20, shmLineY); // 振幅の範囲より少し長く
+    ctx.moveTo(shmOriginX - amplitude - 20, shmLineY);
+    ctx.lineTo(shmOriginX + amplitude + 20, shmLineY);
     ctx.strokeStyle = 'gray';
     ctx.lineWidth = 2;
     ctx.stroke();
 
     // 単振動するおもり
     ctx.beginPath();
-    ctx.arc(shmCurrentX, shmLineY, 20, 0, Math.PI * 2); // 半径20のおもり
+    ctx.arc(shmCurrentX, shmLineY, 20, 0, Math.PI * 2);
     ctx.fillStyle = 'blue';
     ctx.fill();
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    requestAnimationFrame(animate);
-  }, [amplitude, angularFrequency, startTime]);
+    animationFrameIdRef.current = requestAnimationFrame(animate);
+  }, [amplitude, angularFrequency, startTime, isPlaying]); // isPlayingを依存配列に追加
 
+  // コンポーネントがマウントされた時、またはパラメータが変更された時にリセット
   useEffect(() => {
     setAmplitude(initialAmplitude);
     setAngularFrequency(initialFrequency);
+    // startTimeとpausedTimeRefはhandlePlayPauseで適切に設定される
+    // 初期状態は再生なので、ここでは特別startTimeをリセットしない
+    // mounted時に一度だけリセットすることで、初回レンダリング時の不自然な動きを避ける
     setStartTime(Date.now());
+    pausedTimeRef.current = 0; // マウント時にリセット
 
-    let animationFrameId: number;
-    const render = () => {
-      animate();
-      animationFrameId = requestAnimationFrame(render);
+    // useEffectのクリーンアップ関数でアニメーションを確実に停止
+    return () => {
+        if (animationFrameIdRef.current) {
+            cancelAnimationFrame(animationFrameIdRef.current);
+        }
     };
-    animationFrameId = requestAnimationFrame(render);
+  }, [initialAmplitude, initialFrequency]);
 
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [animate, initialAmplitude, initialFrequency]);
+  // isPlayingの状態が変化したときにアニメーションを開始/停止する専用のuseEffect
+  useEffect(() => {
+      if (isPlaying) {
+          // 再生時にはアニメーションループを開始
+          animationFrameIdRef.current = requestAnimationFrame(animate);
+      } else {
+          // 一時停止時にはアニメーションループを停止
+          if (animationFrameIdRef.current) {
+              cancelAnimationFrame(animationFrameIdRef.current);
+              animationFrameIdRef.current = null;
+          }
+      }
+      // cleanup function for this useEffect specific to animation frame management
+      return () => {
+        if(animationFrameIdRef.current){
+          cancelAnimationFrame(animationFrameIdRef.current);
+          animationFrameIdRef.current = null;
+        }
+      }
+  }, [isPlaying, animate]);
+
+
+  const handlePlayPause = () => {
+      setIsPlaying(prevIsPlaying => {
+          if (prevIsPlaying) {
+              // 現在再生中であれば一時停止
+              // 経過時間をpausedTimeRefに加算
+              pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
+          } else {
+              // 現在一時停止中であれば再生再開
+              // 新しいstartTimeを設定することで、一時停止した時点からの時間を継続
+              setStartTime(Date.now());
+          }
+          return !prevIsPlaying; // isPlayingの状態を反転
+      });
+  };
 
   const handleReset = () => {
-    setAmplitude(initialAmplitude);
-    setAngularFrequency(initialFrequency);
-    setStartTime(Date.now());
+      setAmplitude(initialAmplitude);
+      setAngularFrequency(initialFrequency);
+      setStartTime(Date.now()); // 時間をリセット
+      pausedTimeRef.current = 0; // 一時停止時間もリセット
+      setIsPlaying(true); // 再生状態に戻す
   };
 
   return (
@@ -155,7 +190,12 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
           value={amplitude}
           onChange={(e) => {
             setAmplitude(parseFloat(e.target.value));
-            setStartTime(Date.now());
+            // スライダーを動かした時に、isPlayingがfalseならstartTimeをリセットしない
+            // isPlayingがtrueなら、一時停止したときのように時間を記録してリセット
+            if (isPlaying) {
+              pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
+              setStartTime(Date.now());
+            }
           }}
         />
         <label htmlFor="frequency">角振動数 (ω):</label>
@@ -168,9 +208,15 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
           value={angularFrequency}
           onChange={(e) => {
             setAngularFrequency(parseFloat(e.target.value));
-            setStartTime(Date.now());
+             if (isPlaying) {
+              pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
+              setStartTime(Date.now());
+            }
           }}
         />
+        <button onClick={handlePlayPause}>
+          {isPlaying ? '一時停止' : '再生'}
+        </button>
         <button onClick={handleReset}>リセット</button>
       </div>
     </div>
