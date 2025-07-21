@@ -32,7 +32,7 @@ export default function 縦波と横波() {
           <p>
             単振動は，正弦関数や余弦関数で記述できる．<br />
             変位<InlineMath math='x(t)' />は次のように表される．<br />
-            <InlineMath math='x ( t ) = A \cos ( \omega t + \phi )'/><br />
+            <InlineMath math='x ( t ) = A \sin ( \omega t + \phi )'/><br />
           </p>
           <p>ここで，</p>
           <ul>
@@ -41,6 +41,10 @@ export default function 縦波と横波() {
             <li><InlineMath math='t' />：時間</li>
             <li><InlineMath math='\phi' />：初期位相（<InlineMath math='t=0' />における変異を決定するための定数）</li>
           </ul>
+          <p>さらに，先ほどの変位の式を<InlineMath math='t' />で微分すると，速度<InlineMath math='v(t)' />や加速度<InlineMath math='a(t)' />が求められる．<br />
+          <InlineMath math='v ( t ) = A  \omega \cos ( \omega t + \phi )' /><br />
+          <InlineMath math='a(t) = - A \omega ^2 \sin ( \omega t + \phi) = - \omega ^2 x' />
+          </p>
         </div>
       </section>
     </>
