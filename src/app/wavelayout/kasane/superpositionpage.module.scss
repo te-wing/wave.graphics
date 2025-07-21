@@ -1,0 +1,14 @@
+.controlSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.controlTable {
+  max-width: 309px;
+  margin: auto;
+}
+
+.slider {
+  accent-color: var(--a-default);
+}
