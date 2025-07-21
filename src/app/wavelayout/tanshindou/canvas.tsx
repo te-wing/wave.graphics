@@ -1,5 +1,6 @@
 'use client';
 
+import styles from './tanshindoucanvas.module.scss'
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 interface OscillationCanvasProps {
@@ -184,6 +185,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
         <label htmlFor="amplitude">振幅 (円の半径):</label>
         <input
           type="range"
+          className={styles.slider}
           id="amplitude"
           min="10"
           max="150"
@@ -201,6 +203,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
         <label htmlFor="frequency">角振動数 (ω):</label>
         <input
           type="range"
+          className={styles.slider}
           id="frequency"
           min="0.1"
           max="10"
@@ -214,10 +217,10 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
             }
           }}
         />
+        <button onClick={handleReset}>リセット</button>
         <button onClick={handlePlayPause}>
           {isPlaying ? '一時停止' : '再生'}
         </button>
-        <button onClick={handleReset}>リセット</button>
       </div>
     </div>
   );
