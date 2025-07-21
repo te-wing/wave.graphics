@@ -21,8 +21,8 @@ interface SuperpositionCanvasProps {
 
 const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
   waveSpread = 0.05,
-  waveAmplitudeLeft = 50, // 左の波のデフォルト振幅 (50px)
-  waveAmplitudeRight = 50, // 右の波のデフォルト振幅 (50px)
+  waveAmplitudeLeft = 110, // 左の波のデフォルト振幅
+  waveAmplitudeRight = 40, // 右の波のデフォルト振幅
   waveSpeed = 0.2,
   duration = 0.7,
   sampleRate = 1000,

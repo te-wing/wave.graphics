@@ -5,8 +5,8 @@ import SuperpositionCanvas from './canvas';
 
 export default function 重ね合わせ() {
   // スライダの値を管理
-  const [leftAmplitude, setLeftAmplitude] = useState(50);
-  const [rightAmplitude, setRightAmplitude] = useState(50);
+  const [leftAmplitude, setLeftAmplitude] = useState(110);
+  const [rightAmplitude, setRightAmplitude] = useState(40);
 
   return (
     <>
