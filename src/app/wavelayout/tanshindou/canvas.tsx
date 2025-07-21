@@ -1,3 +1,4 @@
+// components/OscillationCanvas.tsx
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
@@ -38,13 +39,10 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     const shmLineY = canvas.height * 3 / 4; // 下の方に配置
 
     // 円周上の点の座標
-    // x = R * cos(θ), y = R * sin(θ)
-    // CanvasのY座標は下が正なので、円運動のy成分にマイナスをかけると直感的になります
     const circlePointX = circleCenterX + amplitude * Math.cos(angle);
     const circlePointY = circleCenterY - amplitude * Math.sin(angle); // Y軸反転
 
     // 単振動のX座標 (円周上の点のX座標をそのまま投影)
-    // 単振動の平衡点をshmOriginXとして、そこからの変位を計算します
     const shmCurrentX = shmOriginX + amplitude * Math.cos(angle); // 円運動のX成分を直接利用
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -97,8 +95,8 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     // 単振動の平衡点 (中央の赤い点線)
     ctx.beginPath();
     ctx.setLineDash([5, 5]); // 点線
-    ctx.moveTo(shmOriginX, shmLineY - amplitude - 20); // 平衡点の少し上から
-    ctx.lineTo(shmOriginX, shmLineY + amplitude + 20); // 平衡点の少し下まで
+    ctx.moveTo(shmOriginX, 0); // Y座標をキャンバスの上端 (0) に変更
+    ctx.lineTo(shmOriginX, canvas.height); // Y座標をキャンバスの下端 (canvas.height) に変更
     ctx.strokeStyle = 'red';
     ctx.stroke();
     ctx.setLineDash([]); // 点線をリセット
@@ -146,7 +144,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
   return (
     <div>
-      <canvas id="myCanvas" ref={canvasRef} width={800} height={600}></canvas> {/* 高さも調整すると良いかもしれません */}
+      <canvas id="myCanvas" ref={canvasRef} width={800} height={600}></canvas>
       <div className="controls">
         <label htmlFor="amplitude">振幅 (円の半径):</label>
         <input
