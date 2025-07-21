@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import OscillationCanvas from './canvas';
 import styles from './tanshindoupage.module.scss';
-import { InlineMath } from 'react-katex';
+import { InlineMath, BlockMath } from 'react-katex';
 
 export const metadata: Metadata = {
   title: '単振動 | Wave App by Wing',
@@ -31,9 +31,9 @@ export default function 縦波と横波() {
           <h3>数式による表現</h3>
           <p>
             単振動は，正弦関数や余弦関数で記述できる．<br />
-            変位<InlineMath math='x(t)' />は次のように表される．<br />
-            <InlineMath math='x ( t ) = A \sin ( \omega t + \phi )'/><br />
+            変位<InlineMath math='x(t)' />は次のように表される．
           </p>
+          <BlockMath math='x ( t ) = A \sin ( \omega t + \phi )'/>
           <p>ここで，</p>
           <ul>
             <li><InlineMath math='A' />：振幅（平衡点からの最大変位）</li>
@@ -41,10 +41,9 @@ export default function 縦波と横波() {
             <li><InlineMath math='t' />：時間</li>
             <li><InlineMath math='\phi' />：初期位相（<InlineMath math='t=0' />における変異を決定するための定数）</li>
           </ul>
-          <p>さらに，先ほどの変位の式を<InlineMath math='t' />で微分すると，速度<InlineMath math='v(t)' />や加速度<InlineMath math='a(t)' />が求められる．<br />
-          <InlineMath math='v ( t ) = A  \omega \cos ( \omega t + \phi )' /><br />
-          <InlineMath math='a(t) = - A \omega ^2 \sin ( \omega t + \phi) = - \omega ^2 x' />
-          </p>
+          <p>さらに，先ほどの変位の式を<InlineMath math='t' />で微分すると，速度<InlineMath math='v(t)' />や加速度<InlineMath math='a(t)' />が求められる．</p>
+          <BlockMath math='v ( t ) = A  \omega \cos ( \omega t + \phi )' />
+          <BlockMath math='a(t) = - A \omega ^2 \sin ( \omega t + \phi) = - \omega ^2 x(t)' />
         </div>
       </section>
     </>
