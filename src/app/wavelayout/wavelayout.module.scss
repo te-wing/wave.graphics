@@ -1,0 +1,19 @@
+.homeButton {
+  position: fixed;
+  display: flex;
+  bottom: 60px;
+  left: 20px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--a-default);
+  justify-content: center;
+  align-items: center;
+}
+
+.homeLink {
+  color: var(--a-default);
+  :hover {
+    color: var(--a-hover);
+  }
+}
