@@ -4,6 +4,7 @@ import styles from './homepage.module.scss';
 export default function Home() {
   return (
     <>
+      <h2>コンテンツ一覧</h2>
       <p>スクロールして，様々な波の模型を見てみましょう！</p>
       <table>
         <colgroup>
@@ -27,6 +28,11 @@ export default function Home() {
           </tr>
         </tbody>
       </table>
+      <h2>このプログラムのソースコード</h2>
+      <p>本サイトのソースコードは，全て<a href='https://r.wing.osaka/wavesrccode' target='_blank'>こちら</a>で公開しております．</p>
+      <ul>
+        <li>利用したフレームワーク：<a href='https://r.wing.osaka/nextjs' target='_blank'>Next.js</a></li>
+      </ul>
     </>
   );
 }
