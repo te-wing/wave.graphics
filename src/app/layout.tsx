@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.scss";
 import styles from './rootLayout.module.scss';
 import Link from 'next/link';
+import 'katex/dist/katex.min.css';
 
 export const metadata: Metadata = {
   title: "Wave App by Wing",
