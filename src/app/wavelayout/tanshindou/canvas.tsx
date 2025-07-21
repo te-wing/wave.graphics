@@ -181,44 +181,64 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   return (
     <>
       <canvas id="myCanvas" ref={canvasRef} width={800} height={490}></canvas>
-      <div className="controls">
-        <label htmlFor="amplitude">振幅 (円の半径):</label>
-        <input
-          type="range"
-          className={styles.slider}
-          id="amplitude"
-          min="10"
-          max="150"
-          value={amplitude}
-          onChange={(e) => {
-            setAmplitude(parseFloat(e.target.value));
-            // スライダーを動かした時に、isPlayingがfalseならstartTimeをリセットしない
-            // isPlayingがtrueなら、一時停止したときのように時間を記録してリセット
-            if (isPlaying) {
-              pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
-              setStartTime(Date.now());
-            }
-          }}
-        />
-        <br />
-        <label htmlFor="frequency">角振動数:</label>
-        <input
-          type="range"
-          className={styles.slider}
-          id="frequency"
-          min="0.1"
-          max="10"
-          step="0.1"
-          value={angularFrequency}
-          onChange={(e) => {
-            setAngularFrequency(parseFloat(e.target.value));
-             if (isPlaying) {
-              pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
-              setStartTime(Date.now());
-            }
-          }}
-        />
-        <br />
+      <div className={styles.controls}>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label htmlFor="amplitude">
+                  振幅（円の半径）
+                </label>
+              </td>
+              <td>：</td>
+              <td>
+                <input
+                  type="range"
+                  className={styles.slider}
+                  id="amplitude"
+                  min="10"
+                  max="150"
+                  value={amplitude}
+                  onChange={(e) => {
+                    setAmplitude(parseFloat(e.target.value));
+                    // スライダーを動かした時に、isPlayingがfalseならstartTimeをリセットしない
+                    // isPlayingがtrueなら、一時停止したときのように時間を記録してリセット
+                    if (isPlaying) {
+                      pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
+                      setStartTime(Date.now());
+                    }
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="frequency">
+                  角振動数
+                </label>
+              </td>
+              <td>：</td>
+              <td>
+                <input
+                  type="range"
+                  className={styles.slider}
+                  id="frequency"
+                  min="0.1"
+                  max="10"
+                  step="0.1"
+                  value={angularFrequency}
+                  onChange={(e) => {
+                    setAngularFrequency(parseFloat(e.target.value));
+                    if (isPlaying) {
+                      pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
+                      setStartTime(Date.now());
+                    }
+                  }}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <button onClick={handleReset}>リセット</button>
         <button onClick={handlePlayPause}>
           {isPlaying ? '一時停止' : '再生'}
