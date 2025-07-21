@@ -37,9 +37,9 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
     // --- 描画の基準点を調整 ---
     const circleCenterX = canvas.width / 2;
-    const circleCenterY = canvas.height / 4;
+    const circleCenterY = canvas.height / 3;
     const shmOriginX = canvas.width / 2;
-    const shmLineY = canvas.height * 3 / 4;
+    const shmLineY = canvas.height * 2 / 3;
 
     const circlePointX = circleCenterX + amplitude * Math.cos(angle);
     const circlePointY = circleCenterY - amplitude * Math.sin(angle);
@@ -179,7 +179,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
   return (
     <div>
-      <canvas id="myCanvas" ref={canvasRef} width={800} height={600}></canvas>
+      <canvas id="myCanvas" ref={canvasRef} width={800} height={490}></canvas>
       <div className="controls">
         <label htmlFor="amplitude">振幅 (円の半径):</label>
         <input
