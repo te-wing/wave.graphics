@@ -2,6 +2,12 @@ import "./globals.scss";
 import styles from './rootLayout.module.scss';
 import Link from 'next/link';
 import 'katex/dist/katex.min.css';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Wave App by Wing',
+  description: 'Wingが作成している，波のシミュレーションアプリです．'
+}
 
 export default function RootLayout({
   children,
