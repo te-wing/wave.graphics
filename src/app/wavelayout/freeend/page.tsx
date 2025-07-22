@@ -6,6 +6,7 @@ export default function FixedEndWavePage() {
   return(
     <>
       <FreeEndReflectionCanvas />
+      <p>※右上のリンクで，自由端・固定端を切り替えることができます．</p>
       <h3>図の見方</h3>
       <ul>
         <li><strong>赤い破線</strong>：波が反射する面を示しています．</li>
@@ -19,6 +20,7 @@ export default function FixedEndWavePage() {
         特徴としては，以下のようなものが挙げられる．
       </p>
       <ul>
+        <li>反射波の波形は，図の紫色の点線部分を，反射面に対して線対称移動することで得られる．</li>
         <li>入射波と反射波で，位相は反転しない．</li>
         <li>端点の変位は最大になる．</li>
       </ul>
