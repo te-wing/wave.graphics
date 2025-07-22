@@ -13,6 +13,10 @@
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv ./env.d.ts"
 	},
 	"dependencies": {
+		"@mdx-js/loader": "^3.1.0",
+		"@mdx-js/react": "^3.1.0",
+		"@next/mdx": "^15.4.3",
+		"@types/mdx": "^2.0.13",
 		"@types/react-katex": "^3.0.4",
 		"katex": "^0.16.22",
 		"next": "15.3.5",
