@@ -15,19 +15,19 @@ export default function Home() {
         </colgroup>
         <tbody>
           <tr>
-            <td><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00ff62"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg></td>
+            <td><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill='var(--green-check)'><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg></td>
             <td><Link href='/wavelayout/tanshindou'>単振動</Link></td>
             <td>：</td>
             <td>単振動は，波の基本です．さっそく可視化してみましょう．</td>
           </tr>
           <tr>
-            <td><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00ff62"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg></td>
+            <td><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill='var(--green-check)'><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg></td>
             <td><Link href='/wavelayout/pulse'>パルス波</Link></td>
             <td>：</td>
             <td>ごく短い間の単独の波を，パルス波といいます．パルス波を用いて，波の伝わり方を観察しましょう．</td>
           </tr>
           <tr>
-            <td><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00ff62"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg></td>
+            <td><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill='var(--green-check)'><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg></td>
             <td><Link href='/wavelayout/kasane'>波の重ね合わせ</Link></td>
             <td>：</td>
             <td>パルス波を使って，二つの波が重なったらどうなるか，観察してみましょう．</td>
