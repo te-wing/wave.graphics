@@ -20,9 +20,9 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
   pulseSpeed = 0.2, // パルス波の速度（デフォルト値）
   duration = 0.7, // シミュレーションの総時間（デフォルト値）
   height = 300, // キャンバスの高さ（デフォルト値）
-  lineColor = 'orange', // 入射波の線の色（デフォルト値）
-  reflectedLineColor = 'red', // 反射波の線の色（デフォルト値）
-  combinedLineColor = 'green', // 合成波の線の色（デフォルト値）
+  lineColor = '#ea00ffff', // 入射波の線の色（デフォルト値）
+  reflectedLineColor = '#00cc00', // 反射波の線の色（デフォルト値）
+  combinedLineColor = '#ffa238', // 合成波の線の色（デフォルト値）
   backgroundColor = 'transparent', // キャンバスの背景色（デフォルト値）
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null); // キャンバス要素への参照
@@ -103,7 +103,7 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
     ctx.stroke();
 
     // 反射壁（垂直な破線の青い線）を描画
-    ctx.strokeStyle = 'blue';
+    ctx.strokeStyle = 'red';
     ctx.lineWidth = 2;
     ctx.setLineDash([5, 5]); // 破線パターン
     ctx.beginPath();
