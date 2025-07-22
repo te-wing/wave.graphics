@@ -11,7 +11,6 @@ export default function KasaneWave() {
 
   return (
     <>
-      <h2>波の重ね合わせ</h2>
       <section className={styles.controlSection}>
         <SuperpositionCanvas 
           waveAmplitudeLeft={leftAmplitude}

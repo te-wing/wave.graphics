@@ -12,9 +12,9 @@ export default function 縦波と横波() {
   return(
     <>
       <h2>単振動</h2>
-      <section className={styles.mainSection}>
+      <div className={styles.mainSection}>
         <OscillationCanvas initialAmplitude={120} initialFrequency={1.5} />
-        <div>
+        <section>
           <h3>単振動とは？</h3>
           <p>等速円運動する物体を真横から見ると，往復運動に見える．このような一直線上の運動を，<strong>単振動</strong>という．</p>
           <h4>主な特徴</h4>
@@ -23,7 +23,7 @@ export default function 縦波と横波() {
             <li><strong>対称性</strong>：平衡点を挟んで左右対称に運動する．</li>
             <li><strong>復元力</strong>：「フックの法則」などのように，変位に比例した復元力（平衡点に戻ろうとする力）が働く．</li>
           </ul>      
-          <h3>単振動する物体の具体例</h3>
+          <h4>単振動する物体の具体例</h4>
           <p>
             例えば，<strong>バネにつけたおもりの往復運動</strong>は，単振動である．また，振り子において，触れ角が十分小さい時，おもりの動きは単振動と見なすことができる．<br />
             また，音波中の空気分子の振動も単振動と見做せることから分かるように，<strong>波は単振動する分子で構成</strong>される．
@@ -44,8 +44,8 @@ export default function 縦波と横波() {
           <p>さらに，先ほどの変位の式を<InlineMath math='t' />で微分すると，速度<InlineMath math='v(t)' />や加速度<InlineMath math='a(t)' />が求められる．</p>
           <BlockMath math='v ( t ) = A  \omega \cos ( \omega t + \phi )' />
           <BlockMath math='a(t) = - A \omega ^2 \sin ( \omega t + \phi) = - \omega ^2 x(t)' />
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   )
 }

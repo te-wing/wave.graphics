@@ -12,6 +12,7 @@ export default function SuperpositionWaveLayout({
 }>) {
   return (
     <>
+      <h2>波の重ね合わせ</h2>
       {children}
     </>
   );
