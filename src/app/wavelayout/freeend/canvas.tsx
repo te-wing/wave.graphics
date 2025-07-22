@@ -175,6 +175,7 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
     // --- 合成波（緑の太線）の描画 ---
     ctx.strokeStyle = combinedLineColor; // 緑の線
     ctx.lineWidth = 3; // 太線に設定
+    ctx.globalAlpha = 0.4; // 透明度を0.6に設定
 
     ctx.beginPath();
     // 合成波は反射壁より左側のみに描画
@@ -193,6 +194,7 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
     }
     ctx.stroke();
     ctx.setLineDash([]); // 念のためリセット
+    ctx.globalAlpha = 1.0; // 透明度を元に戻す
 
   }, [
     pulseAmplitude, pulseSpread, duration, incidentTimeOffset, reflectedTimeOffset,
