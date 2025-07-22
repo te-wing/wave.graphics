@@ -61,7 +61,7 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
       });
     }
     return data;
-  }, []);*/
+  }, []); */  // 無効化してます
 
   const getGaussianWaveAmplitudeAtTime = useCallback((
     targetTime: number,
