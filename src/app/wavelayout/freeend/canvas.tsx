@@ -174,8 +174,8 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
 
     // --- 合成波（緑の太線）の描画 ---
     ctx.strokeStyle = combinedLineColor; // 緑の線
-    ctx.lineWidth = 3; // 太線に設定
-    ctx.globalAlpha = 0.4; // 透明度を0.6に設定
+    ctx.lineWidth = 10; // 太線に設定
+    ctx.globalAlpha = 0.6; // 透明度を0.6に設定
 
     ctx.beginPath();
     // 合成波は反射壁より左側のみに描画
@@ -256,8 +256,7 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
         // レスポンシブデザインと美観のためにTailwind CSSクラスとインラインスタイルを適用
         style={{
           backgroundColor: backgroundColor,
-          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-          width: '100%', // キャンバスが親要素の幅の90%を超えないようにする
+          width: '100%',
           height: `${height}px`, // プロパティから明示的な高さを設定
           display: 'block' // 適切なサイズ設定と余分なスペースの回避を保証
         }}
