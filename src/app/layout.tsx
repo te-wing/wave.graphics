@@ -6,8 +6,12 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Wave App by Wing',
-  description: 'Wingが作成している，波のシミュレーションアプリです．'
-}
+  description: 'Wingが作成している，波のシミュレーションアプリです．',
+  icons: [
+    { rel: 'icon', url: '/wavewing.png' },
+    { rel: 'apple-touch-icon', url: '/wavewing.png', sizes: '1600x1600' },
+  ],
+};
 
 export default function RootLayout({
   children,
