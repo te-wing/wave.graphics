@@ -1,16 +1,28 @@
 import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
+import type { NextConfig } from "next";
+import withMDX from "@next/mdx";
 
-// Here we use the @cloudflare/next-on-pages next-dev module to allow us to
-// use bindings during local development (when running the application with
-// `next dev`). This function is only necessary during development and
-// has no impact outside of that. For more information see:
-// https://github.com/cloudflare/next-on-pages/blob/main/internal-packages/next-dev/README.md
+// Cloudflare の開発プラットフォーム設定
+// 開発時 (`next dev`) にのみ有効
 setupDevPlatform().catch(console.error);
 
-import type { NextConfig } from "next";
-
 const nextConfig: NextConfig = {
-  /* config options here */
+  // ページの拡張子にmdxとmdを追加
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+
+  // ReactのStrictModeを有効化
+  reactStrictMode: true,
+
+  // 他のNext.js設定...
 };
 
-export default nextConfig;
+// MDXの設定をNext.jsの設定と結合
+const mdxConfig = withMDX({
+  options: {
+    // remark-gfmを使う場合、Next.jsの設定ファイルをmjsにする必要があるため注意
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
+export default mdxConfig(nextConfig);
