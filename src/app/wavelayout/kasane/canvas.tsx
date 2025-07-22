@@ -40,7 +40,7 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
   const [timeOffsetRightWave, setTimeOffsetRightWave] = useState(0);
   const [canvasWidth] = useState(800);
 
-  const generateGaussianWaveData = useCallback((
+  /*const generateGaussianWaveData = useCallback((
     amp: number, // このampはピクセル値として扱われる
     sigma: number,
     dur: number,
@@ -61,7 +61,7 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
       });
     }
     return data;
-  }, []);
+  }, []);*/
 
   const getGaussianWaveAmplitudeAtTime = useCallback((
     targetTime: number,
