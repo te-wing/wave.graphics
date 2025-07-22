@@ -256,10 +256,8 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
         // レスポンシブデザインと美観のためにTailwind CSSクラスとインラインスタイルを適用
         style={{
           backgroundColor: backgroundColor,
-          border: '1px solid #ccc',
-          borderRadius: '8px',
           boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-          maxWidth: '90%', // キャンバスが親要素の幅の90%を超えないようにする
+          width: '100%', // キャンバスが親要素の幅の90%を超えないようにする
           height: `${height}px`, // プロパティから明示的な高さを設定
           display: 'block' // 適切なサイズ設定と余分なスペースの回避を保証
         }}
