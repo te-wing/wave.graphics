@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: '波の重ね合わせ | Wave App by Wing',
