@@ -20,21 +20,21 @@
 		"@types/react-katex": "^3.0.4",
 		"katex": "^0.16.22",
 		"next": "15.3.5",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
 		"react-katex": "^3.1.0",
 		"sass": "^1.89.2"
 	},
 	"devDependencies": {
 		"@cloudflare/next-on-pages": "^1.13.12",
-		"@eslint/eslintrc": "^3",
+		"@eslint/eslintrc": "^3.3.1",
 		"@types/node": "^20.19.9",
-		"@types/react": "^19",
-		"@types/react-dom": "^19",
-		"eslint": "^9",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"eslint": "^9.31.0",
 		"eslint-config-next": "15.3.5",
-		"typescript": "^5",
-		"vercel": "^44.5.0",
-		"wrangler": "^4.25.0"
+		"typescript": "^5.8.3",
+		"vercel": "^44.5.3",
+		"wrangler": "^4.25.1"
 	}
 }
