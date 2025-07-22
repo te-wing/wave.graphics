@@ -9,7 +9,6 @@ interface SuperpositionCanvasProps {
   waveAmplitudeRight?: number; // 右の波の振幅 (ピクセル単位)
   waveSpeed?: number;
   duration?: number;
-  sampleRate?: number;
   height?: number;
   lineColor?: string;
   backgroundColor?: string;
@@ -25,7 +24,6 @@ const SuperpositionCanvas: React.FC<SuperpositionCanvasProps> = ({
   waveAmplitudeRight = 40, // 右の波のデフォルト振幅
   waveSpeed = 0.2,
   duration = 0.7,
-  sampleRate = 1000,
   height = 300,
   lineColor = 'orange',
   backgroundColor = 'transparent',

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import SuperpositionCanvas from './canvas';
 import styles from './superpositionpage.module.scss'
 
-export default function 重ね合わせ() {
+export default function KasaneWave() {
   // スライダの値を管理
   const [leftAmplitude, setLeftAmplitude] = useState(110);
   const [rightAmplitude, setRightAmplitude] = useState(40);
