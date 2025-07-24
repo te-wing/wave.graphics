@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './homepage.module.scss';
-import ErrorMark from './homepageListLogo/error';
+import ErrorMark from './homepageListLogo/errormark';
 import HomeCheck from './homepageListLogo/check';
 
 export default function Home() {
