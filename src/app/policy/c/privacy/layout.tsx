@@ -12,6 +12,7 @@ export default function PolicyContentLayout({
 }>) {
   return (
     <>
+      <h3>プライバシーに関する声明</h3>
       {children}
     </>
   );
