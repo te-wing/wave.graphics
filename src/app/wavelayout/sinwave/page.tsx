@@ -10,7 +10,7 @@ export default function 正弦波() {
   return(
     <>
       <OscillationCanvas />
-      <p>すみません，準備中です...</p>
+      <h2>正弦波</h2>
     </>
   )
 }
