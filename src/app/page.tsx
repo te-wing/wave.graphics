@@ -42,9 +42,9 @@ export default function Home() {
         </div>
       </section>
       <section>
-        <h3>このプログラムのソースコード</h3>
+        <h2>このプログラムのソースコード</h2>
         <p>本サイトのソースコードは，全て<a href='https://r.wing.osaka/wavesrccode' target='_blank'>こちら</a>で公開しております．</p>
-        <h3>利用したフレームワーク</h3>
+        <h2>利用したフレームワーク</h2>
         <ul>
           <li><strong><a href='https://r.wing.osaka/nextjs' target='_blank'>Next.js</a></strong>：Webアプリの構築を効率化し，高速で使いやすくする．</li>
           <li><strong><a href='https://r.wing.osaka/katex' target='_blank'>KaTeX</a></strong>：Webページ上に数式を記述できる．</li>
