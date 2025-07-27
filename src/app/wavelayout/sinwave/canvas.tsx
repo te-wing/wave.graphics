@@ -88,17 +88,17 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     // 円運動する点 (紫の点)
     ctx.beginPath();
     ctx.arc(circlePointX, circlePointY, 10 * scaleFactor, 0, Math.PI * 2); // 半径もスケール
-    ctx.fillStyle = 'purple';
+    ctx.fillStyle = 'red';
     ctx.fill();
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'gray';
     ctx.lineWidth = 1 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
-    // 半径の線 (オレンジ)
+    // 半径の線
     ctx.beginPath();
     ctx.moveTo(circleCenterX, circleCenterY);
     ctx.lineTo(circlePointX, circlePointY);
-    ctx.strokeStyle = 'orange';
+    ctx.strokeStyle = 'red';
     ctx.lineWidth = 2 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
@@ -108,7 +108,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.setLineDash([5 * scaleFactor, 5 * scaleFactor]); // 破線の間隔もスケール
     ctx.moveTo(circlePointX, circlePointY);
     ctx.lineTo(shmCurrentX, shmCurrentY); // 単振動のX座標と円運動のY座標
-    ctx.strokeStyle = 'green';
+    ctx.strokeStyle = 'orange';
     ctx.stroke();
     ctx.setLineDash([]); // 破線をリセット
 
@@ -131,18 +131,18 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.lineWidth = 2 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
-    // 単振動するおもり (青い円)
+    // 単振動するおもり
     ctx.beginPath();
     ctx.arc(shmCurrentX, shmCurrentY, 20 * scaleFactor, 0, Math.PI * 2); // 半径もスケール
-    ctx.fillStyle = 'blue';
+    ctx.fillStyle = 'orange';
     ctx.fill();
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'gray';
     ctx.lineWidth = 1 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
     // --- 正弦波の描画 ---
     ctx.beginPath();
-    ctx.strokeStyle = 'blue'; // 波の色
+    ctx.strokeStyle = 'orange'; // 波の色
     ctx.lineWidth = 2 * scaleFactor; // 波の太さもスケール
 
     const waveSpeed = 150; // 波の伝播速度 (ピクセル/秒) - この値を変更して波の速さを調整できます

@@ -65,7 +65,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.arc(circlePointX, circlePointY, 10, 0, Math.PI * 2);
     ctx.fillStyle = 'red';
     ctx.fill();
-    ctx.strokeStyle = 'red';
+    ctx.strokeStyle = 'gray';
     ctx.lineWidth = 1;
     ctx.stroke();
 
@@ -108,7 +108,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.arc(shmCurrentX, shmLineY, 20, 0, Math.PI * 2);
     ctx.fillStyle = 'orange';
     ctx.fill();
-    ctx.strokeStyle = 'orange';
+    ctx.strokeStyle = 'gray';
     ctx.lineWidth = 1;
     ctx.stroke();
 
