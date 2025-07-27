@@ -45,6 +45,7 @@ export default function 正弦波() {
         したがって，時刻<InlineMath math='t \text{[s]}' />での点Pの変位<InlineMath math='y'/>は，時刻<InlineMath math='(t-t_{0}) \text{[s]}'/>での原点の変位と同じである．ゆえに，<br />
         <BlockMath math='y = A \sin \frac { 2 \pi } { T } ( t - t _ { 0 } ) = A \sin \frac { 2 \pi } { T } ( t - \frac { x } { v } )'/>
         ここで，<InlineMath math='v=\frac{\lambda}{T}'/>より，<strong>正弦波の式</strong>は次のようになる．
+        <BlockMath math='y = A \sin 2 \pi ( \frac { t } { T } - \frac { x } { \lambda } )' />
       </p>
     </>
   )
