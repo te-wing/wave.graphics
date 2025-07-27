@@ -20,6 +20,10 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   const animationFrameIdRef = useRef<number | null>(null); // requestAnimationFrame IDを保持
   const pausedTimeRef = useRef<number>(0); // 一時停止した時点の経過時間（ミリ秒）
 
+  // 基準となる設計サイズを定義
+  const designWidth = 800; // この幅を基準に描画がスケールされます
+  const designHeight = 340; // この高さを基準にアスペクト比が維持されます
+
   const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -36,48 +40,58 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     const currentElapsedTime = (Date.now() - startTime + pausedTimeRef.current) / 1000;
     const angle = angularFrequency * currentElapsedTime;
 
+    // 現在のキャンバス幅と設計幅に基づくスケールファクター
+    const scaleFactor = canvas.width / designWidth;
+
     // --- 描画の基準点を調整 (90度左回転後) ---
+    // 全ての座標とサイズにscaleFactorを適用
+    const scaledAmplitude = amplitude * scaleFactor;
+    const scaledPadding = 20 * scaleFactor; // パディングもスケール
+    const scaledGap = 250 * scaleFactor; // 円運動と単振動の間の距離もスケール
+
     // 円運動のY軸中心
-    const circleCenterX = canvas.width / 4; // キャンバスの左1/4に配置
+    // 円運動を左端に寄せるために、X座標を振幅とパディングに基づいて設定
+    const circleCenterX = scaledAmplitude + scaledPadding; // キャンバスの左端から振幅+20pxに配置
     const circleCenterY = canvas.height / 2; // キャンバスの垂直中央に配置
 
     // 単振動のX軸中心 (垂直線)
-    const shmLineX = canvas.width * 3 / 4; // キャンバスの右3/4に配置
+    // 円運動からの相対位置で単振動の開始位置を決定
+    const shmLineX = circleCenterX + scaledGap; // 円運動の右に250px離して配置
     const shmOriginY = canvas.height / 2; // 単振動の平衡点（垂直中央）
 
     // 円運動の点の座標 (90度左回転後のX, Yオフセットを適用)
     // 元のX成分が新しいY成分に、元のY成分が新しいX成分に（符号反転）
     // Y軸が下向きに増加するため、cos(angle)が正の時にYが増加するように調整
-    const circlePointX = circleCenterX + amplitude * Math.sin(angle); // 新しい水平位置
-    const circlePointY = circleCenterY + amplitude * Math.cos(angle); // 新しい垂直位置
+    const circlePointX = circleCenterX + scaledAmplitude * Math.sin(angle); // 新しい水平位置
+    const circlePointY = circleCenterY + scaledAmplitude * Math.cos(angle); // 新しい垂直位置
 
     // 単振動の点の座標 (垂直単振動)
     const shmCurrentX = shmLineX; // X座標は固定
-    const shmCurrentY = shmOriginY + amplitude * Math.cos(angle); // Y座標は円運動の垂直成分に同期
+    const shmCurrentY = shmOriginY + scaledAmplitude * Math.cos(angle); // Y座標は円運動の垂直成分に同期
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // --- 左側の円運動の描画 ---
     // 円の中心 (赤点)
     ctx.beginPath();
-    ctx.arc(circleCenterX, circleCenterY, 5, 0, Math.PI * 2);
+    ctx.arc(circleCenterX, circleCenterY, 5 * scaleFactor, 0, Math.PI * 2); // 半径もスケール
     ctx.fillStyle = 'red';
     ctx.fill();
 
     // 円の軌道 (灰色の円)
     ctx.beginPath();
-    ctx.arc(circleCenterX, circleCenterY, amplitude, 0, Math.PI * 2);
+    ctx.arc(circleCenterX, circleCenterY, scaledAmplitude, 0, Math.PI * 2);
     ctx.strokeStyle = 'gray';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 2 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
     // 円運動する点 (紫の点)
     ctx.beginPath();
-    ctx.arc(circlePointX, circlePointY, 10, 0, Math.PI * 2);
+    ctx.arc(circlePointX, circlePointY, 10 * scaleFactor, 0, Math.PI * 2); // 半径もスケール
     ctx.fillStyle = 'purple';
     ctx.fill();
     ctx.strokeStyle = 'black';
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 1 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
     // 半径の線 (オレンジ)
@@ -85,13 +99,13 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.moveTo(circleCenterX, circleCenterY);
     ctx.lineTo(circlePointX, circlePointY);
     ctx.strokeStyle = 'orange';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 2 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
     // --- 円運動と単振動を繋ぐ垂線 (正射影) ---
     // 円の点から単振動の点へ水平に線を引く
     ctx.beginPath();
-    ctx.setLineDash([5, 5]); // 破線
+    ctx.setLineDash([5 * scaleFactor, 5 * scaleFactor]); // 破線の間隔もスケール
     ctx.moveTo(circlePointX, circlePointY);
     ctx.lineTo(shmCurrentX, shmCurrentY); // 単振動のX座標と円運動のY座標
     ctx.strokeStyle = 'green';
@@ -102,7 +116,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
     // 円の中心を通る水平の赤い点線を追加
     ctx.beginPath();
-    ctx.setLineDash([5, 5]); // 破線
+    ctx.setLineDash([5 * scaleFactor, 5 * scaleFactor]); // 破線の間隔もスケール
     ctx.moveTo(0, circleCenterY); // キャンバスの左端から
     ctx.lineTo(canvas.width, circleCenterY); // キャンバスの右端まで
     ctx.strokeStyle = 'red';
@@ -111,40 +125,38 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
     // 単振動の軌道 (垂直線)
     ctx.beginPath();
-    ctx.moveTo(shmLineX, shmOriginY - amplitude - 20); // 平衡点から振幅分上へ
-    ctx.lineTo(shmLineX, shmOriginY + amplitude + 20); // 平衡点から振幅分下へ
+    ctx.moveTo(shmLineX, shmOriginY - scaledAmplitude - scaledPadding); // 平衡点から振幅分上へ
+    ctx.lineTo(shmLineX, shmOriginY + scaledAmplitude + scaledPadding); // 平衡点から振幅分下へ
     ctx.strokeStyle = 'gray';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 2 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
     // 単振動するおもり (青い円)
     ctx.beginPath();
-    ctx.arc(shmCurrentX, shmCurrentY, 20, 0, Math.PI * 2);
+    ctx.arc(shmCurrentX, shmCurrentY, 20 * scaleFactor, 0, Math.PI * 2); // 半径もスケール
     ctx.fillStyle = 'blue';
     ctx.fill();
     ctx.strokeStyle = 'black';
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 1 * scaleFactor; // 線幅もスケール
     ctx.stroke();
 
     // --- 正弦波の描画 ---
     ctx.beginPath();
     ctx.strokeStyle = 'blue'; // 波の色
-    ctx.lineWidth = 2; // 波の太さ
+    ctx.lineWidth = 2 * scaleFactor; // 波の太さもスケール
 
     const waveSpeed = 150; // 波の伝播速度 (ピクセル/秒) - この値を変更して波の速さを調整できます
     const waveNumber = angularFrequency / waveSpeed; // 波の波数 k = ω / v
 
     // 波の開始点 (単振動する青い物体と同じX座標から開始)
-    // shmCurrentX は単振動する青い物体のX座標
-    // shmCurrentY は単振動する青い物体のY座標
     ctx.moveTo(shmCurrentX, shmCurrentY);
 
     // キャンバスの右端まで波を描画
-    for (let x = shmCurrentX; x <= canvas.width; x += 1) { // 1ピクセルずつ描画
+    for (let x = shmCurrentX; x <= canvas.width; x += 1 * scaleFactor) { // xの増分もスケール
       // 波の位相は、時間経過と位置によって変化
       // 位相 = 角度 - k * (x - 波源のx)
       const wavePhase = angle - waveNumber * (x - shmCurrentX);
-      const waveY = shmOriginY + amplitude * Math.cos(wavePhase);
+      const waveY = shmOriginY + scaledAmplitude * Math.cos(wavePhase); // 振幅はscaledAmplitude
       ctx.lineTo(x, waveY);
     }
     ctx.stroke();
@@ -172,7 +184,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   useEffect(() => {
       if (isPlaying) {
           // 再生時にはアニメーションループを開始
-          animationFrameIdRef.current = requestAnimationFrame(animate); // ここを修正しました
+          animationFrameIdRef.current = requestAnimationFrame(animate);
       } else {
           // 一時停止時にはアニメーションループを停止
           if (animationFrameIdRef.current) {
@@ -195,14 +207,20 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     if (!canvas) return;
     
     const setCanvasDimensions = () => {
-      // キャンバス要素の実際の表示サイズに合わせて描画バッファサイズを設定
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      const parent = canvas.parentElement;
+      if (!parent) return;
+
+      // 親要素の幅を基準にする
+      const currentWidth = parent.offsetWidth;
+      const aspectRatio = designHeight / designWidth; // 基準となるアスペクト比
+
+      canvas.width = currentWidth;
+      canvas.height = currentWidth * aspectRatio; // 幅に合わせて高さを調整し、アスペクト比を維持
+
       // サイズ変更後にキャンバス内容を再描画
       if (!isPlaying) { // 一時停止中の場合は一度だけ再描画
           animate();
       }
-      // 再生中の場合は、既存のrequestAnimationFrameループが継続的に再描画する
     };
 
     // 初期設定
@@ -246,8 +264,8 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
         <canvas
           id="myCanvas"
           ref={canvasRef}
-          // widthとheight属性は削除し、CSSで100%幅を設定
-          style={{ width: '100%', height: '340px' }} // 高さは固定値のまま
+          // widthとheight属性は削除し、CSSで100%幅と自動高さを設定
+          style={{ width: '100%', height: 'auto', display: 'block' }} // heightをautoにして、JSで設定
         ></canvas>
         <table>
           <tbody>
