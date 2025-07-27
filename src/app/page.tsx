@@ -3,8 +3,11 @@ import styles from './homepage.module.scss';
 import ErrorMark from './homepageListLogo/errormark';
 import HomeCheck from './homepageListLogo/check';
 import Beta from './homepageListLogo/beta';
+import { getContentsInOrder, ContentMeta } from '../lib/contents';
 
 export default function Home() {
+  const contents: ContentMeta[] = getContentsInOrder(); 
+
   return (
     <>
       <section>
@@ -62,6 +65,21 @@ export default function Home() {
             </tr>
           </tbody>
         </table>
+      </section>
+      <section>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {contents.map((content) => ( // map関数で content を使う
+            <article key={content.slug} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+              {/* 各コンテンツへのリンクは /contents/{slug} となります */}
+              <Link href={`/wavelayout/${content.slug}`} className="block">
+                <h2 className="text-2xl font-semibold text-blue-600 hover:text-blue-800 transition-colors duration-200 mb-2">
+                  {content.title}
+                </h2>
+              </Link>
+              {content.description && <p className="text-gray-700 mb-4">{content.description}</p>}
+            </article>
+          ))}
+        </div>
       </section>
       <section>
         <h3>このプログラムのソースコード</h3>
