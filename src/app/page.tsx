@@ -19,9 +19,11 @@ export default function Home() {
                 {content.isAvailable === false ? (
                   <div className={styles.titleBox}>
                     <ErrorMark />
-                    <h3 className={styles.title}>
-                      {content.title}
-                    </h3>
+                    <Link href={`/wavelayout/${content.slug}`}>
+                      <h3 className={styles.title}>
+                        {content.title}
+                      </h3>
+                    </Link>
                   </div>
                 ) : (
                   <div className={styles.titleBox}>
