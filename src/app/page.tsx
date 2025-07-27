@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './homepage.module.scss';
 import ErrorMark from './homepageListLogo/errormark';
 import HomeCheck from './homepageListLogo/check';
+import Beta from './homepageListLogo/beta';
 
 export default function Home() {
   return (
@@ -51,7 +52,7 @@ export default function Home() {
               <td><ErrorMark /></td>
               <td><Link href='/wavelayout/sinwave'>正弦波</Link></td>
               <td>：</td>
-              <td>Coming soon...</td>
+              <td><Beta /></td>
             </tr>
             <tr>
               <td><ErrorMark /></td>
