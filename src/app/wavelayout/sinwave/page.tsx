@@ -13,6 +13,7 @@ export default function 正弦波() {
       <OscillationCanvas />
       <h2>正弦波</h2>
       <p>波源が単振動をする場合，媒質の各点は波源よりも遅れて単振動するので，<strong>正弦波</strong>が生じる．各点における，元の位置からのズレは，<strong>変位</strong>という．</p>
+      <h3>図について</h3>
       <h3>波の要素</h3>
       <ul>
         <li><strong>山</strong>：波形の最も高いところ</li>
@@ -26,6 +27,10 @@ export default function 正弦波() {
       <p>これらの要素の関係式は，以下の通り．</p>
       <BlockMath math=' v = f \lambda' />
       <BlockMath math=' f = \frac{1}{T}' />
+      <h3>正弦波の具体例</h3>
+      <ul>
+        <li><strong>音波</strong>：縦波</li>
+      </ul>
     </>
   )
 }
