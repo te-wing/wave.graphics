@@ -36,9 +36,11 @@ export default function 正弦波() {
       <h3>正弦波の式</h3>
       <p>
         波源は単振動しており，波は<InlineMath math='x'/>軸の正の向きに速さ<InlineMath math='v  \text{[m/s]}'/>で伝わると仮定する．<br />
-        正弦波の振幅<InlineMath math='A  \text{[m]}'/> ，周期<InlineMath math='T \text{[s]}' />，波長<InlineMath math='\lambda  \text{[m]}'/>とおく．<br />
+        正弦波の振幅<InlineMath math='A \text{[m]}'/> ，周期<InlineMath math='T \text{[s]}' />，波長<InlineMath math='\lambda  \text{[m]}'/>とおく．<br />
         原点<InlineMath math='x=0' />にある波源の，時刻<InlineMath math='t  \text{[s]}' />での変位<InlineMath math='y  \text{[m]}'/>は，次のように表される．<br />
-        <BlockMath math='y=A \sin(\frac{2\pi}{T}) \t'/>
+        <BlockMath math='y = A \sin \frac { 2 \pi } { T } t'/><br />
+        ここで，位置<InlineMath math='x \text{[m]}'/>（点Pとする）にある媒質の，時刻<InlineMath math='t  \text{[s]}' />における変位<InlineMath math='y  \text{[m]}'/>を考える．<br />
+        点P
       </p>
     </>
   )
