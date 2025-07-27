@@ -197,7 +197,7 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
     ctx.globalAlpha = 1.0; // 透明度を元に戻す
 
   }, [
-    pulseAmplitude, pulseSpread, duration, incidentTimeOffset, reflectedTimeOffset,
+    pulseAmplitude, pulseSpread, incidentTimeOffset, reflectedTimeOffset,
     canvasWidth, height, lineColor, reflectedLineColor, combinedLineColor, backgroundColor,
     getWaveAmplitudeAtTime, reflectionPointX, xScale
   ]);
@@ -233,7 +233,7 @@ const FreeEndReflectionCanvas: React.FC<FreeEndReflectionCanvasProps> = ({
 
     drawWave(); // 現在のフレームを描画
     animationFrameId.current = requestAnimationFrame(animate); // 次のフレームを要求
-  }, [drawWave, pulseSpeed, duration, reflectionPointTime, pulseSpread]);
+  }, [drawWave, pulseSpeed, reflectionPointTime, pulseSpread]);
 
   // アニメーションループの開始と停止を行うuseEffect
   useEffect(() => {
