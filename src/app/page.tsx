@@ -14,7 +14,7 @@ export default function Home() {
       <section>
         <div>
           {contents.map((content) => ( // map関数で content を使う
-            <article key={content.slug}>
+            <article className={styles.waveLayoutList} key={content.slug}>
               <div className={styles.titleBox}>
                 {content.isAvailable === false ? (
                   <div className={styles.titleBox}>
