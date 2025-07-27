@@ -4,7 +4,7 @@ import styles from './fixedendlayout.module.scss';
 
 export const metadata: Metadata = {
   title: '固定端反射 | Wave App by Wing',
-  description: '固定端反射について，可視化してみましょう．'
+  description: '固定端反射は，波が固定されている端点で反射するときに起こります．可視化してみましょう．'
 };
 
 export default function FixedEndWaveLayout({

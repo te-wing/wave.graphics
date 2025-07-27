@@ -4,7 +4,7 @@ import styles from './freeendlayout.module.scss';
 
 export const metadata: Metadata = {
   title: '自由端反射 | Wave App by Wing',
-  description: '自由端反射について可視化してみましょう．'
+  description: '自由端反射は，波が固定されていない端点で反射するときに起こります．可視化してみましょう．'
 };
 
 export default function FreeEndWaveLayout({
