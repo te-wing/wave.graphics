@@ -33,6 +33,11 @@ export default function 正弦波() {
         <li><strong>音波</strong>：縦波だが，正弦波で表される．</li>
         <li><strong>電磁波</strong>：光（可視光），赤外線，電波など．</li>
       </ul>
+      <h3>正弦波の式</h3>
+      <p>
+        波源は単振動しており，波は<InlineMath math='x'/>軸の正の向きに速さ<InlineMath math='v  \text{[m/s]}'/>で伝わると仮定する．<br />
+        正弦波の振幅<InlineMath math='A  \text{[m]}'/> ， 
+      </p>
     </>
   )
 }
