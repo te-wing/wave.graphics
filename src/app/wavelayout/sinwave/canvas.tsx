@@ -21,7 +21,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   const pausedTimeRef = useRef<number>(0); // 一時停止した時点の経過時間（ミリ秒）
 
   // 基準となる設計サイズを定義
-  const designWidth = 800; // この幅を基準に描画がスケールされます
+  const designWidth = 1200; // この幅を基準に描画がスケールされます
   const designHeight = 340; // この高さを基準にアスペクト比が維持されます
 
   const animate = useCallback(() => {
