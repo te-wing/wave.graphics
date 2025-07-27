@@ -21,7 +21,11 @@ export default function 正弦波() {
         <li><strong>波長<InlineMath math='\lambda' /></strong>：波一つ分の長さ．山と山の間など．</li>
         <li>波の<strong>速さ<InlineMath math='v' /></strong>：山や谷が進む速さを指す．</li>
         <li><strong>周期<InlineMath math='T' /></strong>：媒質の各点が１回振動するのにかかる時間</li>
+        <li><strong>振動数<InlineMath math='f' /></strong>：１秒あたりに振動する回数</li>
       </ul>
+      <p>これらの要素の関係式は，以下の通り．</p>
+      <BlockMath math=' v = f \lambda' />
+      <BlockMath math=' f = \frac{1}{T}' />
     </>
   )
 }
