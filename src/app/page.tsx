@@ -15,13 +15,26 @@ export default function Home() {
         <div>
           {contents.map((content) => ( // map関数で content を使う
             <article key={content.slug}>
-              {/* 各コンテンツへのリンクは /contents/{slug} となります */}
-              <Link href={`/wavelayout/${content.slug}`}>
-                <h3>
-                  {content.title}
-                </h3>
-              </Link>
-              {content.description && <p className="text-gray-700 mb-4">{content.description}</p>}
+              <div className={styles.titleBox}>
+                {content.isAvailable === false ? (
+                  <div className={styles.titleBox}>
+                    <ErrorMark />
+                    <h3 className={styles.title}>
+                      {content.title}
+                    </h3>
+                  </div>
+                ) : (
+                  <div className={styles.titleBox}>
+                    <HomeCheck />
+                    <Link href={`/contents/${content.slug}`}>
+                      <h3 className={styles.title}>
+                        {content.title}
+                      </h3>
+                    </Link>
+                  </div>
+                )}
+              </div>
+              {content.description && <p className={styles.indexDescription}>{content.description}</p>}
             </article>
           ))}
         </div>
