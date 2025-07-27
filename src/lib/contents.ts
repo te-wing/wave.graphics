@@ -44,8 +44,8 @@ export const allContents: ContentMeta[] = [
   {
     slug: 'sinwave',
     title: '正弦波',
-    description: beta,
-    isAvailable: false,
+    description: '波の中でも正弦波は，音波，電波，光など，様々な場所で観測されます．正弦波は，変化の仕方が正弦関数（三角比のサイン）で表されます．',
+    isAvailable: true,
   },
   {
     slug: 'tateyoko',
