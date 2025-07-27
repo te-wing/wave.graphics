@@ -26,7 +26,7 @@ export default function Home() {
                 ) : (
                   <div className={styles.titleBox}>
                     <HomeCheck />
-                    <Link href={`/contents/${content.slug}`}>
+                    <Link href={`/wavelayout/${content.slug}`}>
                       <h3 className={styles.title}>
                         {content.title}
                       </h3>
