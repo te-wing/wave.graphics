@@ -63,16 +63,16 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
     ctx.beginPath();
     ctx.arc(circlePointX, circlePointY, 10, 0, Math.PI * 2);
-    ctx.fillStyle = 'purple';
+    ctx.fillStyle = 'red';
     ctx.fill();
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'red';
     ctx.lineWidth = 1;
     ctx.stroke();
 
     ctx.beginPath();
     ctx.moveTo(circleCenterX, circleCenterY);
     ctx.lineTo(circlePointX, circlePointY);
-    ctx.strokeStyle = 'orange';
+    ctx.strokeStyle = 'red';
     ctx.lineWidth = 2;
     ctx.stroke();
 
@@ -81,7 +81,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.setLineDash([5, 5]);
     ctx.moveTo(circlePointX, circlePointY);
     ctx.lineTo(shmCurrentX, shmLineY);
-    ctx.strokeStyle = 'green';
+    ctx.strokeStyle = 'orange';
     ctx.stroke();
     ctx.setLineDash([]);
 
@@ -106,9 +106,9 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     // 単振動するおもり
     ctx.beginPath();
     ctx.arc(shmCurrentX, shmLineY, 20, 0, Math.PI * 2);
-    ctx.fillStyle = 'blue';
+    ctx.fillStyle = 'orange';
     ctx.fill();
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'orange';
     ctx.lineWidth = 1;
     ctx.stroke();
 
