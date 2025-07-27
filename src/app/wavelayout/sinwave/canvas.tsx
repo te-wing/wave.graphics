@@ -291,8 +291,8 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
             <tr>
               <td>
                 <label htmlFor="frequency">
-                  角振動数
-                  <InlineMath math='\omega' />
+                  振動数
+                  <InlineMath math='f' />
                 </label>
               </td>
               <td>：</td>
@@ -319,6 +319,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
               <td>
                 <label htmlFor="waveSpeed">
                   波の速さ
+                  <InlineMath math='v' />
                 </label>
               </td>
               <td>：</td>
