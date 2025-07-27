@@ -29,7 +29,8 @@ export default function 正弦波() {
       <BlockMath math=' f = \frac{1}{T}' />
       <h3>正弦波の具体例</h3>
       <ul>
-        <li><strong>音波</strong>：縦波</li>
+        <li><strong>音波</strong>：縦波だが，正弦波で表される．</li>
+        <li><strong>電磁波</strong>：光（可視光），赤外線，電波など．</li>
       </ul>
     </>
   )
