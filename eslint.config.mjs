@@ -1,22 +1,15 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    // 他のルールを追加
-    rules: {
-      "no-unused-vars": "warn",
-    },
-  },
-];
-
-export default eslintConfig;
+export default defineConfig([
+	{
+		files: ["**/*.js"],
+		plugins: {
+			js,
+		},
+		extends: ["js/recommended"],
+		rules: {
+			"no-unused-vars": "warn",
+		},
+	},
+]);
