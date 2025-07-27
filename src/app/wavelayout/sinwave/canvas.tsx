@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import styles from './sincanvas.module.scss' // stylesモジュールを再インポート
+import styles from './sincanvas.module.scss';
+import {InlineMath} from 'react-katex';
 
 interface OscillationCanvasProps {
   initialAmplitude?: number;
@@ -263,6 +264,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
               <td>
                 <label htmlFor="amplitude">
                   振幅（円の半径）
+                  <InlineMath math='A' />
                 </label>
               </td>
               <td>：</td>
@@ -290,6 +292,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
               <td>
                 <label htmlFor="frequency">
                   角振動数
+                  <InlineMath math='\omega' />
                 </label>
               </td>
               <td>：</td>
