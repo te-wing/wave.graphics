@@ -1,20 +1,23 @@
 'use client';
 
-import styles from './sincanvas.module.scss' // stylesモジュールを再インポート
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import styles from './sincanvas.module.scss' // stylesモジュールを再インポート
 
 interface OscillationCanvasProps {
   initialAmplitude?: number;
   initialFrequency?: number;
+  initialWaveSpeed?: number; // 波の速さの初期値を追加
 }
 
 const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   initialAmplitude = 100,
-  initialFrequency = 1,
+  initialFrequency = 2.3,
+  initialWaveSpeed = 150, // 波の速さの初期値を設定
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [amplitude, setAmplitude] = useState(initialAmplitude);
   const [angularFrequency, setAngularFrequency] = useState(initialFrequency);
+  const [waveSpeed, setWaveSpeed] = useState(initialWaveSpeed); // 波の速さの状態を追加
   const [startTime, setStartTime] = useState(Date.now());
   const [isPlaying, setIsPlaying] = useState(true); // アニメーションが再生中かどうかの状態
   const animationFrameIdRef = useRef<number | null>(null); // requestAnimationFrame IDを保持
@@ -145,7 +148,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.strokeStyle = 'orange'; // 波の色
     ctx.lineWidth = 2 * scaleFactor; // 波の太さもスケール
 
-    const waveSpeed = 150; // 波の伝播速度 (ピクセル/秒) - この値を変更して波の速さを調整できます
+    // waveSpeedの状態変数を使用
     const waveNumber = angularFrequency / waveSpeed; // 波の波数 k = ω / v
 
     // 波の開始点 (単振動する青い物体と同じX座標から開始)
@@ -163,12 +166,13 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
 
     animationFrameIdRef.current = requestAnimationFrame(animate);
-  }, [amplitude, angularFrequency, startTime, isPlaying]); // isPlayingを依存配列に追加
+  }, [amplitude, angularFrequency, waveSpeed, startTime, isPlaying]); // waveSpeedを依存配列に追加
 
   // コンポーネントがマウントされた時、またはパラメータが変更された時にリセット
   useEffect(() => {
     setAmplitude(initialAmplitude);
     setAngularFrequency(initialFrequency);
+    setWaveSpeed(initialWaveSpeed); // 波の速さもリセット
     setStartTime(Date.now());
     pausedTimeRef.current = 0; // マウント時にリセット
 
@@ -178,7 +182,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
             cancelAnimationFrame(animationFrameIdRef.current);
         }
     };
-  }, [initialAmplitude, initialFrequency]);
+  }, [initialAmplitude, initialFrequency, initialWaveSpeed]); // initialWaveSpeedを依存配列に追加
 
   // isPlayingの状態が変化したときにアニメーションを開始/停止する専用のuseEffect
   useEffect(() => {
@@ -238,6 +242,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   const handleReset = () => {
       setAmplitude(initialAmplitude);
       setAngularFrequency(initialFrequency);
+      setWaveSpeed(initialWaveSpeed); // 波の速さもリセット
       setStartTime(Date.now()); // 時間をリセット
       pausedTimeRef.current = 0; // 一時停止時間もリセット
       setIsPlaying(true); // 再生状態に戻す
@@ -299,6 +304,32 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
                   value={angularFrequency}
                   onChange={(e) => {
                     setAngularFrequency(parseFloat(e.target.value));
+                    if (isPlaying) {
+                      pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
+                      setStartTime(Date.now());
+                    }
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="waveSpeed">
+                  波の速さ
+                </label>
+              </td>
+              <td>：</td>
+              <td>
+                <input
+                  type="range"
+                  className={styles.slider} // stylesモジュールを使用
+                  id="waveSpeed"
+                  min="10"
+                  max="500"
+                  step="10"
+                  value={waveSpeed}
+                  onChange={(e) => {
+                    setWaveSpeed(parseFloat(e.target.value));
                     if (isPlaying) {
                       pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
                       setStartTime(Date.now());
