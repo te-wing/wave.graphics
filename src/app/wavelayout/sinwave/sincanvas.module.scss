@@ -1,0 +1,28 @@
+.slider {
+  accent-color: var(--a-default);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonList {
+  flex-direction: row;
+}
+
+.button {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: var(--background);
+  color: var(--a-default);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--a-default);
+  margin: 0 4px;
+  :hover {
+    color: var(--a-hover);
+  }
+}
