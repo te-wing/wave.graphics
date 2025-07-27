@@ -235,21 +235,6 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     };
   }, [animate, isPlaying]); // animate関数とisPlayingの状態を依存配列に追加
 
-  const handlePlayPause = () => {
-      setIsPlaying(prevIsPlaying => {
-          if (prevIsPlaying) {
-              // 現在再生中であれば一時停止
-              // 経過時間をpausedTimeRefに加算
-              pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
-          } else {
-              // 現在一時停止中であれば再生再開
-              // 新しいstartTimeを設定することで、一時停止した時点からの時間を継続
-              setStartTime(Date.now());
-          }
-          return !prevIsPlaying; // isPlayingの状態を反転
-      });
-  };
-
   const handleReset = () => {
       setAmplitude(initialAmplitude);
       setAngularFrequency(initialFrequency);
