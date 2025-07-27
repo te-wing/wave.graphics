@@ -2,7 +2,6 @@ import Link from 'next/link';
 import styles from './homepage.module.scss';
 import ErrorMark from './homepageListLogo/errormark';
 import HomeCheck from './homepageListLogo/check';
-import Beta from './homepageListLogo/beta';
 import { getContentsInOrder, ContentMeta } from '../lib/contents';
 
 export default function Home() {
