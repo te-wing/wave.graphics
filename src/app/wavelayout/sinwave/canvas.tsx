@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './sinwavecanvas.module.scss' // stylesモジュールを再インポート
+import styles from './sincanvas.module.scss' // stylesモジュールを再インポート
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 interface OscillationCanvasProps {
@@ -99,11 +99,12 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.setLineDash([]); // 破線をリセット
 
     // --- 右側の垂直単振動の描画 ---
-    // 単振動の平衡点 (中央の赤い点線 - 垂直線)
+
+    // 円の中心を通る水平の赤い点線を追加
     ctx.beginPath();
     ctx.setLineDash([5, 5]); // 破線
-    ctx.moveTo(shmLineX, 0); // キャンバスの上端から
-    ctx.lineTo(shmLineX, canvas.height); // キャンバスの下端まで
+    ctx.moveTo(0, circleCenterY); // キャンバスの左端から
+    ctx.lineTo(canvas.width, circleCenterY); // キャンバスの右端まで
     ctx.strokeStyle = 'red';
     ctx.stroke();
     ctx.setLineDash([]); // 破線をリセット
@@ -124,6 +125,30 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 1;
     ctx.stroke();
+
+    // --- 正弦波の描画 ---
+    ctx.beginPath();
+    ctx.strokeStyle = 'blue'; // 波の色
+    ctx.lineWidth = 2; // 波の太さ
+
+    const waveSpeed = 150; // 波の伝播速度 (ピクセル/秒) - この値を変更して波の速さを調整できます
+    const waveNumber = angularFrequency / waveSpeed; // 波の波数 k = ω / v
+
+    // 波の開始点 (単振動する青い物体と同じX座標から開始)
+    // shmCurrentX は単振動する青い物体のX座標
+    // shmCurrentY は単振動する青い物体のY座標
+    ctx.moveTo(shmCurrentX, shmCurrentY);
+
+    // キャンバスの右端まで波を描画
+    for (let x = shmCurrentX; x <= canvas.width; x += 1) { // 1ピクセルずつ描画
+      // 波の位相は、時間経過と位置によって変化
+      // 位相 = 角度 - k * (x - 波源のx)
+      const wavePhase = angle - waveNumber * (x - shmCurrentX);
+      const waveY = shmOriginY + amplitude * Math.cos(wavePhase);
+      ctx.lineTo(x, waveY);
+    }
+    ctx.stroke();
+
 
     animationFrameIdRef.current = requestAnimationFrame(animate);
   }, [amplitude, angularFrequency, startTime, isPlaying]); // isPlayingを依存配列に追加
@@ -147,7 +172,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   useEffect(() => {
       if (isPlaying) {
           // 再生時にはアニメーションループを開始
-          animationFrameIdRef.current = requestAnimationFrame(animate);
+          animationFrameIdRef.current = requestAnimationFrame(animate); // ここを修正しました
       } else {
           // 一時停止時にはアニメーションループを停止
           if (animationFrameIdRef.current) {
@@ -164,6 +189,33 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
       }
   }, [isPlaying, animate]);
 
+  // キャンバスのサイズを親要素に合わせて動的に設定するuseEffect
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const setCanvasDimensions = () => {
+      // キャンバス要素の実際の表示サイズに合わせて描画バッファサイズを設定
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      // サイズ変更後にキャンバス内容を再描画
+      if (!isPlaying) { // 一時停止中の場合は一度だけ再描画
+          animate();
+      }
+      // 再生中の場合は、既存のrequestAnimationFrameループが継続的に再描画する
+    };
+
+    // 初期設定
+    setCanvasDimensions();
+
+    // ウィンドウのリサイズイベントリスナーを追加
+    window.addEventListener('resize', setCanvasDimensions);
+
+    // クリーンアップ関数
+    return () => {
+      window.removeEventListener('resize', setCanvasDimensions);
+    };
+  }, [animate, isPlaying]); // animate関数とisPlayingの状態を依存配列に追加
 
   const handlePlayPause = () => {
       setIsPlaying(prevIsPlaying => {
@@ -191,7 +243,12 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
   return (
     <>
       <div className={styles.controls}> {/* stylesモジュールを使用 */}
-        <canvas id="myCanvas" ref={canvasRef} width={400} height={340}></canvas> {/* 幅と高さを入れ替え */}
+        <canvas
+          id="myCanvas"
+          ref={canvasRef}
+          // widthとheight属性は削除し、CSSで100%幅を設定
+          style={{ width: '100%', height: '340px' }} // 高さは固定値のまま
+        ></canvas>
         <table>
           <tbody>
             <tr>
