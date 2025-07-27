@@ -251,12 +251,11 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
 
   return (
     <>
-      <div className={styles.controls}> {/* stylesモジュールを使用 */}
+      <div className={styles.controls}>
         <canvas
           id="myCanvas"
           ref={canvasRef}
-          // widthとheight属性は削除し、CSSで100%幅と自動高さを設定
-          style={{ width: '100%', height: 'auto', display: 'block' }} // heightをautoにして、JSで設定
+          style={{ width: '100%', height: 'auto', display: 'block' }} // heightをautoに
         ></canvas>
         <table>
           <tbody>
@@ -271,15 +270,13 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
               <td>
                 <input
                   type="range"
-                  className={styles.slider} // stylesモジュールを使用
+                  className={styles.slider}
                   id="amplitude"
                   min="10"
                   max="150"
                   value={amplitude}
                   onChange={(e) => {
                     setAmplitude(parseFloat(e.target.value));
-                    // スライダーを動かした時に、isPlayingがfalseならstartTimeをリセットしない
-                    // isPlayingがtrueなら、一時停止したときのように時間を記録してリセット
                     if (isPlaying) {
                       pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTime);
                       setStartTime(Date.now());
@@ -299,7 +296,7 @@ const OscillationCanvas: React.FC<OscillationCanvasProps> = ({
               <td>
                 <input
                   type="range"
-                  className={styles.slider} // stylesモジュールを使用
+                  className={styles.slider}
                   id="frequency"
                   min="0.1"
                   max="10"
