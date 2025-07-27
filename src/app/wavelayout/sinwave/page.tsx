@@ -40,7 +40,11 @@ export default function 正弦波() {
         原点<InlineMath math='x=0' />にある波源の，時刻<InlineMath math='t  \text{[s]}' />での変位<InlineMath math='y  \text{[m]}'/>は，次のように表される．<br />
         <BlockMath math='y = A \sin \frac { 2 \pi } { T } t'/><br />
         ここで，位置<InlineMath math='x \text{[m]}'/>（点Pとする）にある媒質の，時刻<InlineMath math='t  \text{[s]}' />における変位<InlineMath math='y  \text{[m]}'/>を考える．<br />
-        点P
+        点Pに原点の振動が伝わるのにかかる時間<InlineMath math='t _ { 0 } \text{[s]}' />は，次のように表される．<br />
+        <BlockMath math='t _ { 0 } = \frac { x } { v } \text{[s]}' /><br />
+        したがって，時刻<InlineMath math='t \text{[s]}' />での点Pの変位<InlineMath math='y'/>は，時刻<InlineMath math='(t-t_{0}) \text{[s]}'/>での原点の変位と同じである．ゆえに，<br />
+        <BlockMath math='y = A \sin \frac { 2 \pi } { T } ( t - t _ { 0 } ) = A \sin \frac { 2 \pi } { T } ( t - \frac { x } { v } )'/>
+        ここで，<InlineMath math='v=\frac{\lambda}{T}'/>より，<strong>正弦波の式</strong>は次のようになる．
       </p>
     </>
   )
