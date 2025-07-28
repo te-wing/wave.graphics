@@ -15,7 +15,7 @@ export default function WaveLayout({
         一覧に戻る
       </Link>
       <p className={styles.menu}>※ビューが固まった場合は，ブラウザーのリロードボタンを押してください．</p>
-      <noscript>この機能を利用するには，JavaScriptを有効にする必要があります．</noscript>
+      <noscript>※ページ内の一部の機能を利用するには，JavaScriptを有効にする必要があります．</noscript>
       {children}
     </>
   );
