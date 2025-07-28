@@ -1,11 +1,11 @@
 @font-face {
-    font-family: Playwrite;
-    src: url('/fonts/Playwrite.ttf');
+  font-family: Playwrite;
+  src: url('/fonts/Playwrite.ttf');
 }
 
 @font-face {
-    font-family: ZenMaru;
-    src: url('/fonts/ZenMaru.ttf');
+  font-family: ZenMaru;
+  src: url('/fonts/ZenMaru.ttf');
 }
 
 :root {
@@ -44,14 +44,19 @@ body {
 
 //共通のデザイン
 a {
-    font-weight: 500;
-    color: var(--a-default);
-    text-decoration: inherit;
+  font-weight: 500;
+  color: var(--a-default);
+  text-decoration: inherit;
 }
 a:hover {
-    color: var(--a-hover);
+  color: var(--a-hover);
 }
 
 a, p, h2, h3, h4, td, label, li {
-    font-family: ZenMaru;
+  font-family: ZenMaru;
+}
+
+noscript {
+  font-family: ZenMaru;
+  font-size: 1em;
 }
