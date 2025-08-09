@@ -14,6 +14,15 @@ export default function FormBox() {
       return;
     }
 
+// Workersが返す可能性のあるレスポンスの型
+    type WorkersResponse = {
+      // 成功時に含まれるプロパティ
+      message?: string;
+      key?: string;
+      // 失敗時に含まれるプロパティ
+      error?: string;
+    };
+
     const handleSubmit = async (event: Event) => {
       event.preventDefault();
 
@@ -35,7 +44,8 @@ export default function FormBox() {
           body: formData,
         });
 
-        const result = await response.json();
+        // レスポンスを'WorkersResponse'型として扱う
+        const result: WorkersResponse = await response.json();
 
         if (response.ok) {
           alert('おおきに，たぶんアンケートの送信ができました．');
