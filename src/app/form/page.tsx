@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import styles from './formbox.module.scss';
 import Script from 'next/script';
 
 export default function FormBox() {
