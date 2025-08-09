@@ -99,7 +99,7 @@ export default function FormBox() {
         ></div>
         <br /><br />
 
-        <button className="zenMaru" type="submit">送信</button>
+        <button id="submitButtonOnForm" className={styles.submitBtn} type="submit">送信</button>
       </form>
     </div>
   );
