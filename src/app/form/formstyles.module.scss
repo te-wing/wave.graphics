@@ -1,3 +1,39 @@
-.a {
+.formBox {
+  width: 100%;
   
+  .h4 {
+    text-align: center;
+  }
+
+  .form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.submitButton {
+  align-items: center;
+  font-family: ZenMaru;
+}
+
+.shortTextBox {
+  margin: 0 10px;
+  width: 100%;
+  @media (min-width: 300px) {
+    width: 290px;
+  }
+  font-family: ZenMaru;
+  font-size: 1em;
+}
+
+.commentBox {
+  font-family: ZenMaru;
+  font-size: 1em;
+  margin: 0 10px;
+  width: 100%;
+  @media (min-width: 500px) {
+    width: 490px;
+  }
+  height: 140px;
 }
