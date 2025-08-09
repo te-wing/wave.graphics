@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Script from 'next/script';
+import styles from './formstyles.module.scss';
 
 export default function FormBox() {
   useEffect(() => {

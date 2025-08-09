@@ -44,6 +44,9 @@ importers:
       sass:
         specifier: ^1.89.2
         version: 1.89.2
+      scss:
+        specifier: ^0.2.4
+        version: 0.2.4
     devDependencies:
       '@cloudflare/next-on-pages':
         specifier: ^1.13.12
@@ -2858,6 +2861,10 @@ packages:
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
 
+  ometa@0.2.2:
+    resolution: {integrity: sha512-LZuoK/yjU3FvrxPjUXUlZ1bavCfBPqauA7fsNdwi+AVhRdyk2IzgP3JRnevvjzQ6fKHdUw8YISshf53FmpHrng==}
+    engines: {node: '>= 0.2.0'}
+
   once@1.3.3:
     resolution: {integrity: sha512-6vaNInhu+CHxtONf3zw3vq4SP2DOQhjBvIa3rNcG0+P7eKWlYH6Peu7rHizSloRU2EwMz6GraLieis9Ac9+p1w==}
 
@@ -3109,6 +3116,10 @@ packages:
 
   scheduler@0.26.0:
     resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
+
+  scss@0.2.4:
+    resolution: {integrity: sha512-4u8V87F+Q/upVhUmhPnB4C1R11xojkRkWjExL2v0CX2EXTg18VrKd+9JWoeyCp2VEMdSpJsyAvVU+rVjogh51A==}
+    engines: {node: '>= 0.2.0'}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -6614,6 +6625,8 @@ snapshots:
 
   ohash@2.0.11: {}
 
+  ometa@0.2.2: {}
+
   once@1.3.3:
     dependencies:
       wrappy: 1.0.2
@@ -6906,6 +6919,10 @@ snapshots:
       '@parcel/watcher': 2.5.1
 
   scheduler@0.26.0: {}
+
+  scss@0.2.4:
+    dependencies:
+      ometa: 0.2.2
 
   semver@6.3.1: {}
 
