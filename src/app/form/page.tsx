@@ -20,7 +20,7 @@ export default function FormBox() {
       const formData = new FormData(form as HTMLFormElement);
 
       // フォームに存在しない'host'の値を手動でFormDataに追加
-      formData.append('host', 'wing.osaka');
+      formData.append('host', 'wave.app.wing.osaka');
 
       // Turnstileのトークンが存在するかをチェック
       const token = formData.get('cf-turnstile-response');
