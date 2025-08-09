@@ -79,7 +79,7 @@ export default function FormBox() {
           <option value="1">1 - とても悪い</option>
         </select>
         <br /><br />
-        <label htmlFor="comment">ご意見・ご感想（任意）：</label>
+        <label htmlFor="comment">ご意見・お問合せ（任意）：</label>
         <textarea className={styles.commentBox} id="comment" name="comment"></textarea><br/><br/>
 
         {/* Turnstileウィジェットの追加 */}
