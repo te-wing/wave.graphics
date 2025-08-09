@@ -3,6 +3,7 @@ import styles from './rootLayout.module.scss';
 import Link from 'next/link';
 import 'katex/dist/katex.min.css';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Wave App by Wing',
@@ -35,6 +36,7 @@ export default function RootLayout({
             <p className={styles.footerContent}>必ず<Link href='/policy'>利用規約</Link>をご覧ください．</p>
           </section>
         </footer>
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
       </body>
     </html>
   );
