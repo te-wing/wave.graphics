@@ -6,29 +6,48 @@ import styles from './formstyles.module.scss';
 
 export default function FormBox() {
   useEffect(() => {
-    const form = document.getElementById('survey-form');
-    const workerUrl = 'https://form-workers.wing.osaka';
+    const form = document.getElementById('survey-form') as HTMLFormElement; // ここを修正
+    const submitButton = document.getElementById('submitButtonOnForm') as HTMLButtonElement; // ここを修正
+    const rateSelect = document.getElementById('rate') as unknown as HTMLSelectElement;
 
-    if (!form || !(form instanceof HTMLFormElement)) {
+    if (!form || !submitButton || !rateSelect) {
       console.error('フォーム要素が見つからないか，正しい形式ではありません．');
       return;
     }
 
-// Workersが返す可能性のあるレスポンスの型
-    type WorkersResponse = {
-      // 成功時に含まれるプロパティ
-      message?: string;
-      key?: string;
-      // 失敗時に含まれるプロパティ
-      error?: string;
+    const validateRate = () => {
+      // rateSelectがHTMLSelectElementであることを明示しているので、.valueにアクセスできます
+      return rateSelect.value !== '';
     };
 
+    const updateButtonState = () => {
+      if (validateRate()) {
+        // submitButtonがHTMLButtonElementであることを明示しているので、.disabledにアクセスできます
+        submitButton.disabled = false;
+        submitButton.classList.remove(styles.disabledBtn);
+      } else {
+        submitButton.disabled = true;
+        submitButton.classList.add(styles.disabledBtn);
+      }
+    };
+
+    // サイト評価の変更を監視
+    rateSelect.addEventListener('change', updateButtonState);
+
+    // 初期状態のチェック
+    updateButtonState();
+
+    // 以下の handleSubmit 関数とイベントリスナーの設定は変更なし
+    const workerUrl = 'https://form-workers.wing.osaka';
+    type WorkersResponse = {
+      message?: string;
+      key?: string;
+      error?: string;
+    };
     const handleSubmit = async (event: Event) => {
       event.preventDefault();
 
       const formData = new FormData(form as HTMLFormElement);
-
-      // フォームに存在しない'host'の値を手動でFormDataに追加
       formData.append('host', 'wave.app.wing.osaka');
 
       // Turnstileのトークンが存在するかをチェック
@@ -38,13 +57,10 @@ export default function FormBox() {
         return;
       }
       try {
-        // FormDataをそのままWorkerに送信
         const response = await fetch(workerUrl, {
           method: 'POST',
           body: formData,
         });
-
-        // レスポンスを'WorkersResponse'型として扱う
         const result: WorkersResponse = await response.json();
 
         if (response.ok) {
@@ -63,6 +79,7 @@ export default function FormBox() {
     form.addEventListener('submit', handleSubmit);
 
     return () => {
+      rateSelect.removeEventListener('change', updateButtonState);
       form.removeEventListener('submit', handleSubmit);
     };
 
