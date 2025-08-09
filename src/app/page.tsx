@@ -50,6 +50,11 @@ export default function Home() {
           <li><strong><a href='https://r.wing.osaka/katex' target='_blank'>KaTeX</a></strong>：Webページ上に数式を記述できる．</li>
           <li><strong><a href='https://r.wing.osaka/sass' target='_blank'>Sass</a></strong>：CSSを拡張したスタイルシート言語．</li>
         </ul>
+        <h2>アンケート・お問い合わせ</h2>
+        <p>
+          <a href='/form'>こちらのページ</a>に，アンケート・お問い合わせ用のフォームを設置しております．ぜひご利用ください．<br />
+          なお，お問い合わせに関しては，メール<a href="mailto:wing@me.wing.osaka">wing@me.wing.osaka</a>からもご連絡いただけます．
+        </p>
       </section>
     </>
   );
