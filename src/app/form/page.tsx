@@ -48,7 +48,7 @@ export default function FormBox() {
       event.preventDefault();
 
       const formData = new FormData(form as HTMLFormElement);
-      formData.append('host', 'wave.app.wing.osaka');
+      formData.append('host', 'wave.graphics');
 
       // Turnstileのトークンが存在するかをチェック
       const token = formData.get('cf-turnstile-response');
