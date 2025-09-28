@@ -31,6 +31,7 @@ export default function RootLayout({
             <Link href='/' className={styles.titleLink}>Wave</Link><Link className={styles.mainTitleMini} href='/'>.graphics</Link>
           </h1>
         </header>
+        <p>このサイトには，<a href='https://wave.graphics'>新しいバージョン</a>があります．</p>
         <section className={styles.children}>
           {children}
         </section>
