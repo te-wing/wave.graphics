@@ -4,6 +4,7 @@ import Link from 'next/link';
 import 'katex/dist/katex.min.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: 'Wave App by Wing',
@@ -21,6 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>
       <body>
         <header className={styles.fixedHeader}>
           <h1 className={styles.mainTitleMini}>
